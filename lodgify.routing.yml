@@ -1,10 +1,18 @@
-lodgify.properties:
+lodgify.view_properties:
   path: '/lodgify-properties'
   defaults:
     _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::listingPage'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::propertiesListPage'
   requirements:
     _permission: 'access content'
+
+lodgify.refresh_properties:
+  path: '/lodgify-refresh-properties'
+  defaults:
+    _title: 'Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::refreshProperties'
+  requirements:
+    _permission: 'administer content'
 
 lodgify.settings:
   path: '/admin/config/system/settings'

@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\file\FileRepositoryInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -35,54 +36,54 @@ final class LodgifyController extends ControllerBase {
   }
 
   /**
-   * Builds the response.
+   * @return array[]
    */
-  public function listingPage(): array {
+  private function getGuzzleClientOptions(): array {
+    // @todo: validate if API is set.
     $api_key = $this->config('lodgify.settings')->get('api_key');
-    $this->getStrProperties($api_key);
-
-    $build['content'] = [
-      '#type' => 'item',
-      '#markup' => $this->t('List of available Lodgify properties.'),
-    ];
-
-    return $build;
-  }
-
-  /**
-   * @param string $api_key
-   * @return null
-   * @throws InvalidPluginDefinitionException
-   * @throws PluginNotFoundException
-   * @throws EntityStorageException
-   * @throws GuzzleException
-   */
-  public function getStrProperties (string $api_key) {
-    $client = new \GuzzleHttp\Client();
-
-    $response = $client->request('GET', 'https://api.lodgify.com/v2/properties?includeCount=false&includeInOut=false&page=1&size=50', [
+    return [
       'headers' => [
         'X-ApiKey' => $api_key,
         'accept' => 'application/json',
       ],
-    ]);
+    ];
+  }
 
+  /**
+   * Returns the Lodgify properties listing page.
+   */
+  public function propertiesListPage(): array {
+    $build['content']['view'] = [
+      '#type' => 'view',
+      '#name' => 'lodgify_properties',
+    ];
+    return $build;
+  }
+
+  private function getProperties(): array {
+    $guzzle_client_options = $this->getGuzzleClientOptions();
+    $client = new Client();
+    // @todo: add pagination support for more than 50 properties
+    $response = $client->request('GET', 'https://api.lodgify.com/v2/properties?includeCount=true&includeInOut=false&page=1&size=50', $guzzle_client_options);
     $lodgify_properties = json_decode($response->getBody()->getContents());
-
-    foreach ($lodgify_properties->items as $key => $value) {
+    return $lodgify_properties->items;
+  }
+  public function refreshProperties() {
+    $lodgify_properties = $this->getProperties();
+    foreach ($lodgify_properties as $key => $value) {
       // @todo: Check if property already exists
-      $property_id = $lodgify_properties->items[$key]->id;
+      $property_id = $lodgify_properties[$key]->id;
 
       // Create file object from remote URL.
-      $image_url = 'https:' . $lodgify_properties->items[$key]->image_url;
+      $image_url = 'https:' . $lodgify_properties[$key]->image_url;
       $image_data = file_get_contents($image_url);
       $image_file = $this->fileRepository->writeData($image_data, "public://$property_id.cover_image.png");
 
       // Create node object with attached file.
       $node = $this->entityTypeManager()->getStorage('node')->create([
         'type' => 'lodgify_property',
-        'title' => $lodgify_properties->items[$key]->name,
-        'field_lodgify_description' => $lodgify_properties->items[$key]->description,
+        'title' => $lodgify_properties[$key]->name,
+        'field_lodgify_description' => $lodgify_properties[$key]->description,
         'field_lodgify_id' => $property_id,
         'field_lodgify_cover_image' => [
           'target_id' => $image_file->id(),
@@ -93,7 +94,7 @@ final class LodgifyController extends ControllerBase {
       $node->save();
     }
 
-    return null;
+    return $this->propertiesListPage();
   }
 
 }
