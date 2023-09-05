@@ -1,0 +1,15 @@
+lodgify.properties:
+  path: '/lodgify-properties'
+  defaults:
+    _title: 'Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::listingPage'
+  requirements:
+    _permission: 'access content'
+
+lodgify.settings:
+  path: '/admin/config/system/settings'
+  defaults:
+    _title: 'Lodgify module settings'
+    _form: 'Drupal\lodgify\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

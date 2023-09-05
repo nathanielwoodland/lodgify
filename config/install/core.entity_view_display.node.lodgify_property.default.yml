@@ -1,0 +1,51 @@
+uuid: ccfbe1a1-1ea8-46ab-a713-79ba6bf6314e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lodgify_property.field_lodgify_cover_image
+    - field.field.node.lodgify_property.field_lodgify_description
+    - field.field.node.lodgify_property.field_lodgify_id
+    - node.type.lodgify_property
+  module:
+    - image
+    - text
+    - user
+id: node.lodgify_property.default
+targetEntityType: node
+bundle: lodgify_property
+mode: default
+content:
+  field_lodgify_cover_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_lodgify_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_lodgify_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

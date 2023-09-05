@@ -1,0 +1,20 @@
+uuid: b8cfe8ae-9bcc-4704-8c1b-adfd2d3408db
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+  enforced:
+    module:
+      - lodgify
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Lodgify Property'
+type: lodgify_property
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

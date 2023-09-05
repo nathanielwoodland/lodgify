@@ -1,0 +1,24 @@
+uuid: 9e0efafd-9f81-4e80-b1a4-a3ce0e925c3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_description
+    - node.type.lodgify_property
+  module:
+    - text
+id: node.lodgify_property.field_lodgify_description
+field_name: field_lodgify_description
+entity_type: node
+bundle: lodgify_property
+label: 'Lodgify property description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

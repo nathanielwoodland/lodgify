@@ -1,0 +1,26 @@
+uuid: 765ef93c-feee-49ce-b851-9c3df0c4b73b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.lodgify_property.field_lodgify_cover_image
+    - field.field.node.lodgify_property.field_lodgify_description
+    - field.field.node.lodgify_property.field_lodgify_id
+    - node.type.lodgify_property
+  module:
+    - user
+id: node.lodgify_property.teaser
+targetEntityType: node
+bundle: lodgify_property
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_lodgify_cover_image: true
+  field_lodgify_description: true
+  field_lodgify_id: true

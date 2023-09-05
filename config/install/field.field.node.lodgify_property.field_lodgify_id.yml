@@ -1,0 +1,23 @@
+uuid: 0018faee-2fee-4021-95f9-5590bc8f4e82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_id
+    - node.type.lodgify_property
+id: node.lodgify_property.field_lodgify_id
+field_name: field_lodgify_id
+entity_type: node
+bundle: lodgify_property
+label: 'Lodgify property ID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

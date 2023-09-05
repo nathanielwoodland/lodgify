@@ -1,0 +1,5 @@
+lodgify.settings:
+  title: Lodgify module settings
+  parent: system.admin_config_system
+  route_name: lodgify.settings
+  weight: 10
