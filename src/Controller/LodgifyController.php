@@ -38,7 +38,8 @@ final class LodgifyController extends ControllerBase {
    * Builds the response.
    */
   public function listingPage(): array {
-    $this->getStrProperties('YXjlubOq1Y4ocAeqS04g6VNWJY3iyg+XsVVoj0TkLXH10ZdNVWQZk0UMzTAVre7n');
+    $api_key = $this->config('lodgify.settings')->get('api_key');
+    $this->getStrProperties($api_key);
 
     $build['content'] = [
       '#type' => 'item',
