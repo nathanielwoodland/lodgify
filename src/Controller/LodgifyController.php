@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for Lodgify routes.
  */
-final class LodgifyController extends ControllerBase {
+class LodgifyController extends ControllerBase {
 
   /**
    * The controller constructor.
@@ -102,15 +102,7 @@ final class LodgifyController extends ControllerBase {
     }
   }
 
-  /**
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   * @throws \GuzzleHttp\Exception\GuzzleException
-   */
-  public function refreshProperties(): RedirectResponse {
-    $lodgify_properties = $this->getProperties();
+  public function refreshProperties($lodgify_properties): bool {
     foreach ($lodgify_properties as $key => $value) {
       $property_id = $lodgify_properties[$key]->id;
       $lodgify_property_node = $this->getOrCreatePropertyById($property_id);
@@ -130,7 +122,12 @@ final class LodgifyController extends ControllerBase {
         ]);
       $lodgify_property_node->save();
     }
-    $this->messenger()->addStatus('Properties successfully refreshed.');
+    return true;
+  }
+
+  public function callRefreshProperties($test_mode = false): RedirectResponse {
+    $this->refreshProperties($this->getProperties());
+    $this->messenger()->addStatus('Lodgify properties successfully refreshed.');
     return $this->redirect('lodgify.settings');
   }
 

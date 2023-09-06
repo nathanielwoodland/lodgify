@@ -11,6 +11,8 @@ dependencies:
     - image
     - text
     - user
+_core:
+  default_config_hash: a5ZBSdcUgkreUddgsQlrkP8wMp4qFZul5mgeXhB0ubA
 id: node.lodgify_property.default
 targetEntityType: node
 bundle: lodgify_property
@@ -25,14 +27,14 @@ content:
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 104
+    weight: 1
     region: content
   field_lodgify_description:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 103
+    weight: 2
     region: content
   field_lodgify_id:
     type: number_integer
@@ -41,11 +43,11 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden: {  }

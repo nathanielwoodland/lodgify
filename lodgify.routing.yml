@@ -10,7 +10,7 @@ lodgify.refresh_properties:
   path: '/lodgify-refresh-properties'
   defaults:
     _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::refreshProperties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::callRefreshProperties'
   requirements:
     _permission: 'administer content'
 

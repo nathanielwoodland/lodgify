@@ -9,8 +9,11 @@ dependencies:
       - lodgify
 third_party_settings:
   menu_ui:
-    available_menus: {  }
-    parent: ''
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: GLSDVmLcp01a0d2yzUcp8se2au8R-g1Gx7aPLCxAYcE
 name: 'Lodgify Property'
 type: lodgify_property
 description: ''
