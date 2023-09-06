@@ -1,5 +1,6 @@
 lodgify.settings:
   title: Lodgify module settings
+  description: 'Manage Lodgify integration settings and refresh properties and bookings.'
   parent: system.admin_config_system
   route_name: lodgify.settings
   weight: 10

@@ -130,7 +130,8 @@ final class LodgifyController extends ControllerBase {
         ]);
       $lodgify_property_node->save();
     }
-    return $this->redirect('lodgify.view_properties');
+    $this->messenger()->addStatus('Properties successfully refreshed.');
+    return $this->redirect('lodgify.settings');
   }
 
 }

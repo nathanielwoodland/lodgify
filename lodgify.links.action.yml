@@ -1,0 +1,6 @@
+lodgify.refresh_properties:
+  route_name: lodgify.refresh_properties
+  title: 'Refresh properties'
+  weight: 10
+  appears_on:
+    - lodgify.settings
