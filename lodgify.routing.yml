@@ -1,23 +1,41 @@
-lodgify.view_properties:
-  path: '/lodgify-properties'
-  defaults:
-    _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::propertiesListPage'
-  requirements:
-    _permission: 'access content'
-
-lodgify.refresh_properties:
-  path: '/lodgify-refresh-properties'
-  defaults:
-    _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::callRefreshProperties'
-  requirements:
-    _permission: 'administer content'
-
 lodgify.settings:
-  path: '/admin/config/system/settings'
+  path: '/admin/config/system/lodgify/settings'
   defaults:
     _title: 'Lodgify module settings'
     _form: 'Drupal\lodgify\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+lodgify.view_properties:
+  path: '/lodgify/properties'
+  defaults:
+    _title: 'Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::propertiesListingPage'
+  requirements:
+    _permission: 'access content'
+
+lodgify.sync_properties.all:
+  path: '/lodgify/sync-properties/all'
+  defaults:
+    _title: 'Sync Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
+  requirements:
+    _permission: 'administer site configuration'
+
+lodgify.sync_properties.new:
+  path: '/lodgify/sync-properties/new'
+  defaults:
+    _title: 'Sync Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
+    sync_existing_records: false
+  requirements:
+    _permission: 'administer site configuration'
+
+lodgify.sync_properties.existing:
+  path: '/lodgify/sync-properties/existing'
+  defaults:
+    _title: 'Sync Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
+    sync_new_records: false
   requirements:
     _permission: 'administer site configuration'

@@ -3,21 +3,25 @@
 namespace Drupal\lodgify\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\file\FileRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\lodgify\LodgifyApiClient;
 use Drupal\lodgify\LodgifyDataManager;
 
 /**
- * Returns responses for Lodgify routes.
+ * Controller for all Lodgify module routes.
  */
 final class LodgifyController extends ControllerBase {
 
-  protected $lodgifyApiClient;
-  protected $lodgifyDataManager;
+  /**
+   * @var \Drupal\lodgify\LodgifyApiClient
+   */
+  protected LodgifyApiClient $lodgifyApiClient;
+
+  /**
+   * @var \Drupal\lodgify\LodgifyDataManager
+   */
+  protected LodgifyDataManager $lodgifyDataManager;
 
   /**
    * The controller constructor.
@@ -41,9 +45,9 @@ final class LodgifyController extends ControllerBase {
   }
 
   /**
-   * Returns the Lodgify properties listing page.
+   * Returns the Lodgify properties listing view.
    */
-  public function propertiesListPage(): array {
+  public function propertiesListingPage(): array {
     $build['content']['view'] = [
       '#type' => 'view',
       '#name' => 'lodgify_properties',
@@ -52,11 +56,20 @@ final class LodgifyController extends ControllerBase {
   }
 
   /**
+   * Calls sync properties methods and redirects to Lodgify settings page.
+   *
+   * @param bool $sync_new_records
+   * @param bool $sync_existing_records
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function callRefreshProperties($test_mode = false): RedirectResponse {
-    $this->lodgifyDataManager->refreshProperties($this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'));
-    $this->messenger()->addStatus('Lodgify properties successfully refreshed.');
+  public function syncProperties(bool $sync_new_records = true, bool $sync_existing_records = true): RedirectResponse {
+    $this->lodgifyDataManager->syncLodgifyData('lodgify_property', $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'), $sync_new_records, $sync_existing_records);
+    $this->messenger()->addStatus('Lodgify properties successfully synced.');
     return $this->redirect('lodgify.settings');
   }
 

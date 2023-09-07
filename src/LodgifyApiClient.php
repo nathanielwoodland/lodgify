@@ -6,7 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\Client;
 
 /**
- * @todo Add class description.
+ * Service class to manage interactions with Lodgify API.
  */
 final class LodgifyApiClient {
 
@@ -18,20 +18,8 @@ final class LodgifyApiClient {
   ) {}
 
   /**
-   * @return array[]
-   */
-  private function getGuzzleRequestHeaders(): array {
-    // @todo: validate if API key is set.
-    $api_key = $this->configFactory->get('lodgify.settings')->get('api_key');
-    return [
-      'headers' => [
-        'X-ApiKey' => $api_key,
-        'accept' => 'application/json',
-      ],
-    ];
-  }
-
-  /**
+   * Gets data from Lodgify API.
+   *
    * @param string $record_type
    * @param string $query_params
    *
@@ -44,5 +32,21 @@ final class LodgifyApiClient {
     $page_number = 1;
     $response = $client->request('GET', "https://api.lodgify.com/v2/$record_type?includeCount=true&page=$page_number&size=50$query_params", $this->getGuzzleRequestHeaders());
     return json_decode($response->getBody()->getContents())->items;
+  }
+
+  /**
+   * Gets Guzzle headers including API key for authentication.
+   *
+   * @return array[]
+   */
+  private function getGuzzleRequestHeaders(): array {
+    // @todo: validate if API key is set.
+    $api_key = $this->configFactory->get('lodgify.settings')->get('api_key');
+    return [
+      'headers' => [
+        'X-ApiKey' => $api_key,
+        'accept' => 'application/json',
+      ],
+    ];
   }
 }
