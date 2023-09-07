@@ -1,19 +1,25 @@
 lodgify.sync_properties.all:
-  route_name: lodgify.sync_properties.all
+  route_name: lodgify.sync_properties
+  route_parameters:
+    sync_type: 'all'
   title: 'Sync all properties'
   weight: 1
   appears_on:
     - lodgify.settings
 
 lodgify.sync_properties.new:
-  route_name: lodgify.sync_properties.new
+  route_name: lodgify.sync_properties
+  route_parameters:
+    sync_type: 'new'
   title: 'Sync new properties'
   weight: 2
   appears_on:
     - lodgify.settings
 
 lodgify.sync_properties.existing:
-  route_name: lodgify.sync_properties.existing
+  route_name: lodgify.sync_properties
+  route_parameters:
+    sync_type: 'existing'
   title: 'Sync existing properties'
   weight: 3
   appears_on:

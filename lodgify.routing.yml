@@ -14,28 +14,11 @@ lodgify.view_properties:
   requirements:
     _permission: 'access content'
 
-lodgify.sync_properties.all:
-  path: '/lodgify/sync-properties/all'
+lodgify.sync_properties:
+  path: '/lodgify/sync-properties/{sync_type}'
   defaults:
     _title: 'Sync Lodgify properties'
     _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
-  requirements:
-    _permission: 'administer site configuration'
-
-lodgify.sync_properties.new:
-  path: '/lodgify/sync-properties/new'
-  defaults:
-    _title: 'Sync Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
-    sync_existing_records: false
-  requirements:
-    _permission: 'administer site configuration'
-
-lodgify.sync_properties.existing:
-  path: '/lodgify/sync-properties/existing'
-  defaults:
-    _title: 'Sync Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
-    sync_new_records: false
+    sync_type: 'all'
   requirements:
     _permission: 'administer site configuration'

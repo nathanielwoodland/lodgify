@@ -23,21 +23,23 @@ final class LodgifyDataManager {
    *
    * @param string $record_type
    * @param array $lodgify_records
-   * @param bool $sync_new_records
-   * @param bool $sync_existing_records
+   * @param string $sync_type
    *
    * @return bool
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException|\Drupal\Core\Entity\EntityStorageException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function syncLodgifyData(string $record_type, array $lodgify_records, bool $sync_new_records = true, bool $sync_existing_records = true): bool {
+  public function syncLodgifyData(string $record_type, array $lodgify_records, string $sync_type): bool {
     foreach ($lodgify_records as $key => $value) {
       $lodgify_id = $lodgify_records[$key]->id;
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
-      if ($existing_lodgify_property_node && !$sync_existing_records) {
+      // Skip if record already exists and sync type is 'new'
+      if ($existing_lodgify_property_node && $sync_type === 'new') {
         continue;
       }
-      if (!$existing_lodgify_property_node && !$sync_new_records) {
+      // Skip if record doesn't yet exist and sync type is 'existing'
+      if (!$existing_lodgify_property_node && $sync_type === 'existing') {
         continue;
       }
       if ($existing_lodgify_property_node) {

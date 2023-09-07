@@ -67,8 +67,8 @@ final class LodgifyController extends ControllerBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function syncProperties(bool $sync_new_records = true, bool $sync_existing_records = true): RedirectResponse {
-    $this->lodgifyDataManager->syncLodgifyData('lodgify_property', $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'), $sync_new_records, $sync_existing_records);
+  public function syncProperties(string $sync_type): RedirectResponse {
+    $this->lodgifyDataManager->syncLodgifyData('lodgify_property', $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'), $sync_type);
     $this->messenger()->addStatus('Lodgify properties successfully synced.');
     return $this->redirect('lodgify.settings');
   }
