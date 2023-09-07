@@ -20,8 +20,8 @@ final class LodgifyApiClient {
   /**
    * @return array[]
    */
-  private function getGuzzleClientOptions(): array {
-    // @todo: validate if API is set.
+  private function getGuzzleRequestHeaders(): array {
+    // @todo: validate if API key is set.
     $api_key = $this->configFactory->get('lodgify.settings')->get('api_key');
     return [
       'headers' => [
@@ -32,15 +32,17 @@ final class LodgifyApiClient {
   }
 
   /**
+   * @param string $record_type
+   * @param string $query_params
+   *
    * @return array
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function getProperties(): array {
-    $guzzle_client_options = $this->getGuzzleClientOptions();
+  public function getLodgifyData(string $record_type, string $query_params): array {
     $client = new Client();
-    // @todo: add pagination support for more than 50 properties
-    $response = $client->request('GET', 'https://api.lodgify.com/v2/properties?includeCount=true&includeInOut=false&page=1&size=50', $guzzle_client_options);
-    $lodgify_properties = json_decode($response->getBody()->getContents());
-    return $lodgify_properties->items;
+    // @todo: add pagination support for more than 50 results
+    $page_number = 1;
+    $response = $client->request('GET', "https://api.lodgify.com/v2/$record_type?includeCount=true&page=$page_number&size=50$query_params", $this->getGuzzleRequestHeaders());
+    return json_decode($response->getBody()->getContents())->items;
   }
 }

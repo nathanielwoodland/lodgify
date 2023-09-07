@@ -51,8 +51,11 @@ final class LodgifyController extends ControllerBase {
     return $build;
   }
 
+  /**
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   */
   public function callRefreshProperties($test_mode = false): RedirectResponse {
-    $this->lodgifyDataManager->refreshProperties($this->lodgifyApiClient->getProperties());
+    $this->lodgifyDataManager->refreshProperties($this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'));
     $this->messenger()->addStatus('Lodgify properties successfully refreshed.');
     return $this->redirect('lodgify.settings');
   }
