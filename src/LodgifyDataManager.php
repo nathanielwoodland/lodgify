@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\file\FileRepositoryInterface;
 
 /**
- * Service class to manage Drupal entities created from lodgify data.
+ * Service class to manage Drupal entities created from Lodgify data.
  */
 final class LodgifyDataManager {
 
