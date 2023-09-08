@@ -12,6 +12,8 @@ dependencies:
     - node
     - text
     - user
+_core:
+  default_config_hash: 9xdTRTqUBZVBlSwUNAthGUOxIgFB0Tt0XujHgAdZWSk
 id: lodgify_properties
 label: 'Lodgify properties'
 module: views
@@ -301,7 +303,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'No properties found.'
+            format: basic_html
+          tokenize: false
       sorts:
         created:
           id: created
