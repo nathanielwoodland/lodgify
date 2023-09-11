@@ -5,4 +5,4 @@ services:
 
   lodgify.properties_service:
     class: Drupal\lodgify\PropertiesService
-    arguments: ['@entity_type.manager', '@file.repository']
+    arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client']

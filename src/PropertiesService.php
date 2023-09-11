@@ -4,6 +4,7 @@ namespace Drupal\lodgify;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\file\FileRepositoryInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 final class PropertiesService {
 
@@ -13,21 +14,30 @@ final class PropertiesService {
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly FileRepositoryInterface $fileRepository,
+    private readonly MessengerInterface $messenger,
+    private readonly LodgifyApiClient $lodgifyApiClient,
   ) {}
 
   /**
    * Creates and/or updates new and/or existing local Lodgify records.
    *
    * @param string $record_type
-   * @param array $lodgify_records
    * @param string $sync_type
    *
    * @return bool
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function syncLodgifyData(string $record_type, array $lodgify_records, string $sync_type): bool {
+  public function syncLodgifyData(string $record_type, string $sync_type): bool {
+    // @todo add support for booking records
+    switch ($record_type) {
+      case 'lodgify_property':
+        $lodgify_records = $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false');
+        break;
+    }
+    // @todo add support for no results
     foreach ($lodgify_records as $key => $value) {
       $lodgify_id = $lodgify_records[$key]->id;
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
@@ -54,6 +64,7 @@ final class PropertiesService {
       switch ($record_type) {
         case 'lodgify_property':
           $this->updateLodgifyProperty($lodgify_record_node, $lodgify_records[$key]);
+          $this->messenger->addStatus('Lodgify properties successfully synced.');
           break;
       }
     }
