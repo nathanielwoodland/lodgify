@@ -6,19 +6,19 @@ lodgify.settings:
   requirements:
     _permission: 'administer site configuration'
 
-lodgify.view_properties:
+lodgify.properties.index:
   path: '/lodgify/properties'
   defaults:
     _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::propertiesListingPage'
+    _controller: '\Drupal\lodgify\Controller\PropertiesController::index'
   requirements:
     _permission: 'access content'
 
-lodgify.sync_properties:
-  path: '/lodgify/sync-properties/{sync_type}'
+lodgify.properties.sync:
+  path: '/lodgify/properties/sync/{sync_type}'
   defaults:
     _title: 'Sync Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\LodgifyController::syncProperties'
+    _controller: '\Drupal\lodgify\Controller\PropertiesController::syncProperties'
     sync_type: 'all'
   requirements:
     _permission: 'administer site configuration'

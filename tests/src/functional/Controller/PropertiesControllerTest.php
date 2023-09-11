@@ -5,11 +5,9 @@ namespace Drupal\Tests\lodgify\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Test description.
- *
  * @group lodgify
  */
-final class LodgifyTest extends BrowserTestBase {
+final class PropertiesControllerTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
@@ -42,7 +40,7 @@ final class LodgifyTest extends BrowserTestBase {
   /**
    * Test properties listing page.
    */
-  public function testPropertiesListingPage(): void {
+  public function testIndexViewLoads(): void {
     $user = $this->drupalCreateUser(['access content']);
     $this->drupalLogin($user);
     $this->drupalGet('lodgify/properties');
@@ -57,7 +55,7 @@ final class LodgifyTest extends BrowserTestBase {
     $this->drupalLogin($user);
     $new_record_sync_types = ['all', 'new'];
     foreach ($new_record_sync_types as $new_record_sync_type) {
-      $this->drupalGet("/lodgify/sync-properties/$new_record_sync_type");
+      $this->drupalGet("/lodgify/properties/sync/$new_record_sync_type");
       $this->drupalGet('/lodgify/properties');
       $this->assertSession()
         ->elementTextEquals('css', 'td.views-field-title', 'Huge condo in Keystone, sleeps 14, great location');
@@ -71,7 +69,7 @@ final class LodgifyTest extends BrowserTestBase {
   public function testSyncExistingProperties(): void {
     $user = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($user);
-    $this->drupalGet('/lodgify/sync-properties/all');
+    $this->drupalGet('/lodgify/properties/sync/all');
     $this->drupalGet('/lodgify/properties');
     $this->assertSession()
       ->elementTextEquals('css', 'td.views-field-title', 'Huge condo in Keystone, sleeps 14, great location');
@@ -83,7 +81,7 @@ final class LodgifyTest extends BrowserTestBase {
       $this->drupalGet('/lodgify/properties');
       $this->assertSession()
         ->elementTextEquals('css', 'td.views-field-title', 'Tiny condo in Keystone');
-      $this->drupalGet("/lodgify/sync-properties/$new_record_sync_type");
+      $this->drupalGet("/lodgify/properties/sync/$new_record_sync_type");
       $this->drupalGet('/lodgify/properties');
       $this->assertSession()
         ->elementTextEquals('css', 'td.views-field-title', 'Huge condo in Keystone, sleeps 14, great location');

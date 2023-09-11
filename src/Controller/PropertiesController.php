@@ -6,12 +6,9 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\lodgify\LodgifyApiClient;
-use Drupal\lodgify\LodgifyDataManager;
+use Drupal\lodgify\PropertiesService;
 
-/**
- * Controller for all Lodgify module routes.
- */
-final class LodgifyController extends ControllerBase {
+final class PropertiesController extends ControllerBase {
 
   /**
    * @var \Drupal\lodgify\LodgifyApiClient
@@ -19,19 +16,19 @@ final class LodgifyController extends ControllerBase {
   protected LodgifyApiClient $lodgifyApiClient;
 
   /**
-   * @var \Drupal\lodgify\LodgifyDataManager
+   * @var \Drupal\lodgify\PropertiesService
    */
-  protected LodgifyDataManager $lodgifyDataManager;
+  protected PropertiesService $propertiesService;
 
   /**
    * The controller constructor.
    */
   public function __construct(
     LodgifyApiClient $lodgifyApiClient,
-    LodgifyDataManager $lodgifyDataManager,
+    PropertiesService $propertiesService,
   ) {
     $this->lodgifyApiClient = $lodgifyApiClient;
-    $this->lodgifyDataManager = $lodgifyDataManager;
+    $this->propertiesService = $propertiesService;
   }
 
   /**
@@ -40,14 +37,14 @@ final class LodgifyController extends ControllerBase {
   public static function create(ContainerInterface $container): self {
     return new self(
       $container->get('lodgify.lodgify_api_client'),
-      $container->get('lodgify.lodgify_data_manager'),
+      $container->get('lodgify.properties_service'),
     );
   }
 
   /**
    * Returns the Lodgify properties listing view.
    */
-  public function propertiesListingPage(): array {
+  public function index(): array {
     $build['content']['view'] = [
       '#type' => 'view',
       '#name' => 'lodgify_properties',
@@ -68,7 +65,7 @@ final class LodgifyController extends ControllerBase {
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function syncProperties(string $sync_type): RedirectResponse {
-    $this->lodgifyDataManager->syncLodgifyData('lodgify_property', $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'), $sync_type);
+    $this->propertiesService->syncLodgifyData('lodgify_property', $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false'), $sync_type);
     $this->messenger()->addStatus('Lodgify properties successfully synced.');
     return $this->redirect('lodgify.settings');
   }

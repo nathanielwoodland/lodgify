@@ -5,13 +5,10 @@ namespace Drupal\lodgify;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\file\FileRepositoryInterface;
 
-/**
- * Service class to manage Drupal entities created from Lodgify data.
- */
-final class LodgifyDataManager {
+final class PropertiesService {
 
   /**
-   * Constructs a LodgifyDataManager object.
+   * Constructs a PropertiesService object.
    */
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,

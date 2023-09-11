@@ -3,6 +3,6 @@ services:
     class: Drupal\lodgify\LodgifyApiClient
     arguments: ['@config.factory']
 
-  lodgify.lodgify_data_manager:
-    class: Drupal\lodgify\LodgifyDataManager
+  lodgify.properties_service:
+    class: Drupal\lodgify\PropertiesService
     arguments: ['@entity_type.manager', '@file.repository']
