@@ -40,16 +40,12 @@ final class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
-    // @todo Validate the form here.
-    // Example:
-    // @code
-    //   if ($form_state->getValue('example') === 'wrong') {
-    //     $form_state->setErrorByName(
-    //       'message',
-    //       $this->t('The value is not correct.'),
-    //     );
-    //   }
-    // @endcode
+     if (trim($form_state->getValue('api_key')) == '') {
+       $form_state->setErrorByName(
+         'message',
+         $this->t('API key is required.'),
+       );
+     }
     parent::validateForm($form, $form_state);
   }
 
