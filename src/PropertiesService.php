@@ -64,7 +64,6 @@ final class PropertiesService {
       switch ($record_type) {
         case 'lodgify_property':
           $this->updateLodgifyProperty($lodgify_record_node, $lodgify_records[$key]);
-          $this->messenger->addStatus('Lodgify properties successfully synced.');
           break;
       }
     }
@@ -122,6 +121,7 @@ final class PropertiesService {
       'title' => 'Lodgify property cover photo'
     ]);
     $lodgify_property_node->save();
+    $this->messenger->addStatus('Lodgify properties successfully synced.');
   }
 
 }
