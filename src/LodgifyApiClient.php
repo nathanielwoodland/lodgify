@@ -6,7 +6,9 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
+use Psr\Log\LoggerInterface;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Service class to manage interactions with Lodgify API.
@@ -22,6 +24,7 @@ final class LodgifyApiClient {
     private readonly Client $httpClient,
     private readonly MessengerInterface $messenger,
     TranslationInterface $stringTranslation,
+    private readonly LoggerInterface $logger,
   ) {}
 
   /**
@@ -38,18 +41,33 @@ final class LodgifyApiClient {
     if (!$headers) {
       return [];
     }
-    // @todo: add pagination support for more than 50 results
+    // @todo: add pagination support
     $page_number = 1;
-    $response = $this->httpClient->request(
-      'GET',
-      "https://api.lodgify.com/v2/$record_type?includeCount=true&page=$page_number&size=50$query_params",
-      $headers
-    );
-    return json_decode($response->getBody()->getContents())->items;
+    try {
+      $response = $this->httpClient->request(
+        'GET',
+        "https://api.lodgify.com/v2/$record_type?includeCount=true&page=$page_number&size=50$query_params",
+        $headers
+      );
+    }
+    catch (GuzzleException $e) {
+      $error_code = $e->getCode();
+      $error_message = $this->t("API request for Lodgify $record_type records failed with HTTP status code: $error_code.");
+      $this->messenger->addError($error_message);
+      $this->logger->error($error_message);
+      return [
+        'success' => false,
+      ];
+    }
+    $response = json_decode($response->getBody()->getContents(), true);
+    return [
+      'success' => true,
+      'response' => $response,
+    ];
   }
 
   /**
-   * Gets Guzzle headers including API key for authentication.
+   * Gets request headers including API key for authentication.
    *
    * @return bool|array[]
    */

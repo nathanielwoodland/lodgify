@@ -38,8 +38,8 @@ final class PropertiesService {
         break;
     }
     // @todo add support for no results
-    foreach ($lodgify_records as $key => $value) {
-      $lodgify_id = $lodgify_records[$key]->id;
+    foreach ($lodgify_records['response']['items'] as $key => $value) {
+      $lodgify_id = $lodgify_records['response']['items'][$key]['id'];
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
       // Skip if record already exists and sync type is 'new'
       if ($existing_lodgify_property_node && $sync_type === 'new') {
@@ -63,7 +63,7 @@ final class PropertiesService {
       // @todo add support for booking records
       switch ($record_type) {
         case 'lodgify_property':
-          $this->updateLodgifyProperty($lodgify_record_node, $lodgify_records[$key]);
+          $this->updateLodgifyProperty($lodgify_record_node, $lodgify_records['response']['items'][$key]);
           break;
       }
     }
@@ -108,19 +108,20 @@ final class PropertiesService {
    */
   private function updateLodgifyProperty($lodgify_property_node, $lodgify_property_update_data) {
     // Create image file from API data
-    $image_url = 'https:' . $lodgify_property_update_data->image_url;
+    $image_url = 'https:' . $lodgify_property_update_data['image_url'];
     $image_data = file_get_contents($image_url);
     $image_file = $this->fileRepository
-      ->writeData($image_data, "public://$lodgify_property_update_data->id.cover_image.png");
+      ->writeData($image_data, 'public://' . $lodgify_property_update_data['id'] . '_cover_image.png');
     // Update node from API data
-    $lodgify_property_node->set('title', $lodgify_property_update_data->name);
-    $lodgify_property_node->set('field_lodgify_description', $lodgify_property_update_data->description);
+    $lodgify_property_node->set('title', $lodgify_property_update_data['name']);
+    $lodgify_property_node->set('field_lodgify_description', $lodgify_property_update_data['description']);
     $lodgify_property_node->set('field_lodgify_cover_image', [
       'target_id' => $image_file->id(),
       'alt' => 'Lodgify property cover photo',
       'title' => 'Lodgify property cover photo'
     ]);
     $lodgify_property_node->save();
+    // @todo: add translatable string
     $this->messenger->addStatus('Lodgify properties successfully synced.');
   }
 

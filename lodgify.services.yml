@@ -1,8 +1,12 @@
 services:
   lodgify.lodgify_api_client:
     class: Drupal\lodgify\LodgifyApiClient
-    arguments: ['@config.factory', '@http_client', '@messenger', '@string_translation']
+    arguments: ['@config.factory', '@http_client', '@messenger', '@string_translation', '@logger.channel.lodgify']
 
   lodgify.properties_service:
     class: Drupal\lodgify\PropertiesService
     arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client']
+
+  logger.channel.lodgify:
+    parent: logger.channel_base
+    arguments: ['lodgify']
