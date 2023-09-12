@@ -1,7 +1,7 @@
 services:
   lodgify.lodgify_api_client:
     class: Drupal\lodgify\LodgifyApiClient
-    arguments: ['@config.factory', '@http_client']
+    arguments: ['@config.factory', '@http_client', '@messenger', '@string_translation']
 
   lodgify.properties_service:
     class: Drupal\lodgify\PropertiesService
