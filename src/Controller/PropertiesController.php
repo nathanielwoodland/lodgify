@@ -52,7 +52,6 @@ final class PropertiesController extends ControllerBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
-   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function syncProperties(string $sync_type): RedirectResponse {
     $this->propertiesService->syncLodgifyData('lodgify_property', $sync_type);

@@ -87,7 +87,7 @@ final class PropertiesService {
   }
 
   /**
-   * Gets Drupal node the corresponds to lodgify record type and ID, and returns
+   * Gets Drupal node that corresponds to lodgify record type and ID; returns
    * false if not found.
    *
    * @param string $record_type
