@@ -34,12 +34,13 @@ final class LodgifyApiClient {
    * @param string $query_params
    *
    * @return array
-   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function getLodgifyData(string $record_type, string $query_params): array {
     $headers = $this->getRequestHeaders();
     if (!$headers) {
-      return [];
+      return [
+        'success' => false,
+      ];
     }
     // @todo: add pagination support
     $page_number = 1;

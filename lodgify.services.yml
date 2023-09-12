@@ -5,7 +5,7 @@ services:
 
   lodgify.properties_service:
     class: Drupal\lodgify\PropertiesService
-    arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client']
+    arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client', '@string_translation', '@logger.channel.lodgify']
 
   logger.channel.lodgify:
     parent: logger.channel_base

@@ -5,8 +5,12 @@ namespace Drupal\lodgify;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\file\FileRepositoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslationInterface;
+use Psr\Log\LoggerInterface;
 
 final class PropertiesService {
+  use StringTranslationTrait;
 
   /**
    * Constructs a PropertiesService object.
@@ -16,6 +20,8 @@ final class PropertiesService {
     private readonly FileRepositoryInterface $fileRepository,
     private readonly MessengerInterface $messenger,
     private readonly LodgifyApiClient $lodgifyApiClient,
+    TranslationInterface $stringTranslation,
+    private readonly LoggerInterface $logger,
   ) {}
 
   /**
@@ -24,20 +30,25 @@ final class PropertiesService {
    * @param string $record_type
    * @param string $sync_type
    *
-   * @return bool
+   * @return void
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
-   * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function syncLodgifyData(string $record_type, string $sync_type): bool {
-    // @todo add support for booking records
+  public function syncLodgifyData(string $record_type, string $sync_type): void {
     switch ($record_type) {
       case 'lodgify_property':
         $lodgify_records = $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false');
         break;
     }
-    // @todo add support for no results
+    if (!$lodgify_records['success']) {
+      return;
+    }
+    if (empty($lodgify_records['response']['items'])) {
+      $this->messenger->addStatus($this->t("No $record_type records found."));
+      return;
+    }
+    $record_count = 0;
     foreach ($lodgify_records['response']['items'] as $key => $value) {
       $lodgify_id = $lodgify_records['response']['items'][$key]['id'];
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
@@ -60,14 +71,19 @@ final class PropertiesService {
             'field_lodgify_id' => $lodgify_id,
           ]);
       }
-      // @todo add support for booking records
       switch ($record_type) {
         case 'lodgify_property':
-          $this->updateLodgifyProperty($lodgify_record_node, $lodgify_records['response']['items'][$key]);
+          $this->updateLodgifyProperty(
+            $lodgify_record_node,
+            $lodgify_records['response']['items'][$key]
+          );
+          $record_count++;
           break;
       }
     }
-    return true;
+    $message = "$record_count $record_type records synced using mode: $sync_type.";
+    $this->logger->info($message);
+    $this->messenger->addStatus($message);
   }
 
   /**
@@ -107,22 +123,22 @@ final class PropertiesService {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function updateLodgifyProperty($lodgify_property_node, $lodgify_property_update_data) {
-    // Create image file from API data
-    $image_url = 'https:' . $lodgify_property_update_data['image_url'];
-    $image_data = file_get_contents($image_url);
-    $image_file = $this->fileRepository
-      ->writeData($image_data, 'public://' . $lodgify_property_update_data['id'] . '_cover_image.png');
-    // Update node from API data
-    $lodgify_property_node->set('title', $lodgify_property_update_data['name']);
-    $lodgify_property_node->set('field_lodgify_description', $lodgify_property_update_data['description']);
-    $lodgify_property_node->set('field_lodgify_cover_image', [
+    if (!empty($lodgify_property_update_data['image_url'])) {
+      $image_url = 'https:' . $lodgify_property_update_data['image_url'];
+      $image_data = file_get_contents($image_url);
+      if ($image_data) {
+        $image_file = $this->fileRepository
+          ->writeData($image_data, 'public://' . $lodgify_property_update_data['id'] . '_cover_image.png');
+      }
+    }
+    $lodgify_property_node->set('title', (!empty($lodgify_property_update_data['name'])) ? $lodgify_property_update_data['name'] : 'Property ' . $lodgify_property_update_data['id']);
+    $lodgify_property_node->set('field_lodgify_description', (!empty($lodgify_property_update_data['description'])) ? $lodgify_property_update_data['description'] : null);
+    $lodgify_property_node->set('field_lodgify_cover_image', (!empty($image_file)) ? [
       'target_id' => $image_file->id(),
-      'alt' => 'Lodgify property cover photo',
-      'title' => 'Lodgify property cover photo'
-    ]);
+      'alt' => $this->t('Lodgify property cover photo'),
+      'title' => $this->t('Lodgify property cover photo')
+    ] : null);
     $lodgify_property_node->save();
-    // @todo: add translatable string
-    $this->messenger->addStatus('Lodgify properties successfully synced.');
   }
 
 }
