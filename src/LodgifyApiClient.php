@@ -2,7 +2,7 @@
 
 namespace Drupal\lodgify;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
@@ -20,7 +20,7 @@ final class LodgifyApiClient {
    * Constructs a LodgifyApiClient object.
    */
   public function __construct(
-    private readonly ConfigFactoryInterface $configFactory,
+    private readonly Settings $settings,
     private readonly Client $httpClient,
     private readonly MessengerInterface $messenger,
     TranslationInterface $stringTranslation,
@@ -73,7 +73,7 @@ final class LodgifyApiClient {
    * @return bool|array[]
    */
   private function getRequestHeaders(): array|bool {
-    $api_key = $this->configFactory->get('lodgify.settings')->get('api_key');
+    $api_key = $this->settings->get('lodgify_api_key');
     if (!$api_key) {
       $this->messenger->addError($this->t('Lodgify API key not found.'));
       return false;
