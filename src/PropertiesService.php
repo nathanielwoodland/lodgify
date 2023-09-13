@@ -25,6 +25,24 @@ final class PropertiesService {
   ) {}
 
   /**
+   * @param array $record_types
+   * @param string $sync_type
+   *
+   * @return void
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function syncLodgifyRecordTypes(array $record_types, string $sync_type): void {
+    foreach ($record_types as $record_type) {
+      if (!is_string($record_type)) {
+        continue;
+      }
+      $this->syncLodgifyRecordType($record_type, $sync_type);
+    }
+  }
+
+  /**
    * Creates and/or updates new and/or existing local Lodgify records.
    *
    * @param string $record_type
@@ -35,17 +53,14 @@ final class PropertiesService {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function syncLodgifyData(string $record_type, string $sync_type): void {
+  public function syncLodgifyRecordType(string $record_type, string $sync_type): void {
     switch ($record_type) {
       case 'lodgify_property':
         $lodgify_records = $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false');
         break;
     }
-    if (!$lodgify_records['success']) {
-      return;
-    }
     if (empty($lodgify_records['response']['items'])) {
-      $this->messenger->addStatus($this->t("No $record_type records found."));
+      $this->messenger->addError($this->t("No $record_type records found."));
       return;
     }
     $record_count = 0;

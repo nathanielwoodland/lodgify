@@ -35,7 +35,7 @@ final class LodgifyApiClient {
    *
    * @return array
    */
-  public function getLodgifyData(string $record_type, string $query_params): array {
+  public function getLodgifyData(string $lodgify_record_type, string $query_params): array {
     $headers = $this->getRequestHeaders();
     if (!$headers) {
       return [
@@ -47,13 +47,13 @@ final class LodgifyApiClient {
     try {
       $response = $this->httpClient->request(
         'GET',
-        "https://api.lodgify.com/v2/$record_type?includeCount=true&page=$page_number&size=50$query_params",
+        "https://api.lodgify.com/v2/$lodgify_record_type?includeCount=true&page=$page_number&size=50$query_params",
         $headers
       );
     }
     catch (GuzzleException $e) {
       $error_code = $e->getCode();
-      $error_message = $this->t("API request for Lodgify $record_type records failed with HTTP status code: $error_code.");
+      $error_message = $this->t("API request for Lodgify $lodgify_record_type records failed with HTTP status code: $error_code.");
       $this->messenger->addError($error_message);
       $this->logger->error($error_message);
       return [
