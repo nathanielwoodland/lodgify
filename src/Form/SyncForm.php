@@ -74,7 +74,7 @@ final class SyncForm extends FormBase {
     $record_types = $form_state->getValue('record_types');
     $sync_type = $form_state->getValue('sync_type');
     $this->propertiesService->syncLodgifyRecordTypes($record_types, $sync_type);
-    $form_state->setRedirect('lodgify.sync');
+    $form_state->setRedirect('lodgify.settings.sync');
   }
 
 }
