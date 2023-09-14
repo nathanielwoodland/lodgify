@@ -4,3 +4,22 @@
  * @file
  * Primary module hooks for Lodgify module.
  */
+
+/**
+ * Implements hook_page_bottom().
+ */
+function lodgify_preprocess_page(array &$variables) {
+  if (
+    \Drupal::routeMatch()->getRouteName() == 'entity.node.canonical'
+    && !empty(($variables['node']))
+    && is_a($variables['node'], '\Drupal\node\Entity\Node')
+    && $variables['node']->getType() == 'lodgify_property'
+  ) {
+    $variables['page']['content']['lodgify_content'] = [
+      '#type' => 'view',
+      '#name' => 'lodgify_property_bookings',
+      '#arguments' => [$variables['node']->get('field_lodgify_id')->getValue()[0]['value']],
+      '#prefix' => '<h2>Upcoming bookings:</h2>',
+    ];
+  }
+}
