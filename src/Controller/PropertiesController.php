@@ -43,19 +43,4 @@ final class PropertiesController extends ControllerBase {
     return $build;
   }
 
-  /**
-   * Calls sync properties methods and redirects to Lodgify settings page.
-   *
-   * @param string $sync_type
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  public function syncProperties(string $sync_type): RedirectResponse {
-    $this->propertiesSyncService->syncLodgifyData('lodgify_property', $sync_type);
-    return $this->redirect('lodgify.settings');
-  }
-
 }
