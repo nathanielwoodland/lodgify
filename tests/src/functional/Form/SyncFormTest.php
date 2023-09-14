@@ -43,7 +43,7 @@ final class SyncFormTest extends BrowserTestBase {
   }
 
   /**
-   * Test sync new properties.
+   * Test sync properties.
    */
   public function testSyncProperties(): void {
     $user = $this->drupalCreateUser(['administer site configuration']);
@@ -86,6 +86,23 @@ final class SyncFormTest extends BrowserTestBase {
           break;
       }
     }
+  }
+
+  /**
+   * Test sync bookings.
+   */
+  public function testSyncBookings(): void {
+    $user = $this->drupalCreateUser(['administer site configuration']);
+    $this->drupalLogin($user);
+    $this->drupalGet('/admin/config/system/lodgify/settings/sync');
+    $edit = [];
+    $edit['record_types[lodgify_property]'] = 'lodgify_property';
+    $edit['record_types[lodgify_booking]'] = 'lodgify_booking';
+    $edit['sync_type'] = 'all';
+    $this->submitForm($edit, 'Sync');
+    $this->drupalGet('/lodgify/properties');
+    $this->click('td.views-field-title a');
+    $this->assertSession()->pageTextContains('Booking for Destiny Farr Rodriguez');
   }
 
 }
