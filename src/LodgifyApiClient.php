@@ -51,7 +51,7 @@ final class LodgifyApiClient {
     }
     catch (GuzzleException $e) {
       $error_code = $e->getCode();
-      $error_message = $this->t("API request for Lodgify $lodgify_record_type records failed with HTTP status code: $error_code.");
+      $error_message = $this->t("API request for Lodgify $route records failed with HTTP status code: $error_code.");
       $this->messenger->addError($error_message);
       $this->logger->error($error_message);
       return [

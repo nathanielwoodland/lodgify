@@ -130,8 +130,8 @@ class SyncServiceBase {
   }
 
   /**
-   * @param $lodgify_property_node
-   * @param $lodgify_property_api_data
+   * @param $lodgify_record_node
+   * @param $lodgify_record_api_data
    *
    * @return void
    */

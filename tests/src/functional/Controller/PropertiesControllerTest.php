@@ -38,10 +38,10 @@ final class PropertiesControllerTest extends BrowserTestBase {
   /**
    * Test properties index page.
    */
-  public function testIndexViewLoads(): void {
+  public function testThatIndexPageLoads(): void {
     $user = $this->drupalCreateUser(['access content']);
     $this->drupalLogin($user);
     $this->drupalGet('lodgify/properties');
-    $this->assertSession()->elementTextEquals('css', 'h1.page-title', 'Lodgify properties');
+    $this->assertSession()->elementTextEquals('css', 'h1', 'Lodgify properties');
   }
 }
