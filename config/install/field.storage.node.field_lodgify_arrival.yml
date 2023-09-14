@@ -1,0 +1,20 @@
+uuid: dc09df45-97d6-4dac-a811-d1001e5deced
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_lodgify_arrival
+field_name: field_lodgify_arrival
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

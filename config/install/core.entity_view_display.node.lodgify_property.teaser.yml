@@ -10,6 +10,8 @@ dependencies:
     - node.type.lodgify_property
   module:
     - user
+_core:
+  default_config_hash: 0RQ5Yi4-e_VqsymHYb0oHPXTPNj9SMQ_brWERmBCOt0
 id: node.lodgify_property.teaser
 targetEntityType: node
 bundle: lodgify_property

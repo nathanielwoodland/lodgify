@@ -1,0 +1,21 @@
+uuid: 575991ac-6ed7-4666-ba6b-4708a656286b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_departure
+    - node.type.lodgify_booking
+  module:
+    - datetime
+id: node.lodgify_booking.field_lodgify_departure
+field_name: field_lodgify_departure
+entity_type: node
+bundle: lodgify_booking
+label: Departure
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

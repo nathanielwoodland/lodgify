@@ -1,0 +1,23 @@
+uuid: 35041806-6714-4690-9226-1872d1a23e52
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_for_lodgify_property_id
+    - node.type.lodgify_booking
+id: node.lodgify_booking.field_for_lodgify_property_id
+field_name: field_for_lodgify_property_id
+entity_type: node
+bundle: lodgify_booking
+label: 'For Lodgify property ID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

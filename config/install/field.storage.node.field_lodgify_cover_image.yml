@@ -6,6 +6,8 @@ dependencies:
     - file
     - image
     - node
+_core:
+  default_config_hash: v3vqzJSe7kbEjL8QDtDOG6xaUlKjzZk_n17G4BImKW8
 id: node.field_lodgify_cover_image
 field_name: field_lodgify_cover_image
 entity_type: node

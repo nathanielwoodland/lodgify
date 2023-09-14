@@ -1,17 +1,15 @@
-uuid: 0018faee-2fee-4021-95f9-5590bc8f4e82
+uuid: 481cf9be-9279-4cb7-a9f8-8e36f167a53e
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_lodgify_id
-    - node.type.lodgify_property
-_core:
-  default_config_hash: pmMb2ejH8tmmVlfa3qHCXwWog7N4SFN1sh_IUI-0oHc
-id: node.lodgify_property.field_lodgify_id
+    - node.type.lodgify_booking
+id: node.lodgify_booking.field_lodgify_id
 field_name: field_lodgify_id
 entity_type: node
-bundle: lodgify_property
-label: 'Lodgify property ID'
+bundle: lodgify_booking
+label: 'Lodgify booking ID'
 description: ''
 required: true
 translatable: false

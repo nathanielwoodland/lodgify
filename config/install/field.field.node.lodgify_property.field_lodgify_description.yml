@@ -7,6 +7,8 @@ dependencies:
     - node.type.lodgify_property
   module:
     - text
+_core:
+  default_config_hash: gk0TPtbasH6lwkt9ptmqFQwN4eF6xF_wM26arxbFqSg
 id: node.lodgify_property.field_lodgify_description
 field_name: field_lodgify_description
 entity_type: node

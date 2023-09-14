@@ -1,21 +1,16 @@
-uuid: b8cfe8ae-9bcc-4704-8c1b-adfd2d3408db
+uuid: 6eb88754-a5dc-437e-91b1-4ffe69879af1
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
-  enforced:
-    module:
-      - lodgify
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
-_core:
-  default_config_hash: AuYZaVTT5nD4ihvEiIZkbzOZ6OK5GI6ee8rXBg7P9sM
-name: 'Lodgify Property'
-type: lodgify_property
+name: 'Lodgify Booking'
+type: lodgify_booking
 description: ''
 help: ''
 new_revision: true

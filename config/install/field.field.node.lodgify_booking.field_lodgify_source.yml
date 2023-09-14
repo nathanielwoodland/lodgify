@@ -1,0 +1,19 @@
+uuid: 4da7d786-2d5d-42a3-9fc9-0d3f4f424387
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_source
+    - node.type.lodgify_booking
+id: node.lodgify_booking.field_lodgify_source
+field_name: field_lodgify_source
+entity_type: node
+bundle: lodgify_booking
+label: 'Booking source'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

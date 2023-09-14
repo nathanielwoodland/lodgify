@@ -1,0 +1,20 @@
+uuid: bacbcb42-02ed-4d1b-bf0b-be09f223e830
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_lodgify_departure
+field_name: field_lodgify_departure
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

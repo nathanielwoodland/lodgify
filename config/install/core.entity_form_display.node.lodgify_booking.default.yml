@@ -1,22 +1,22 @@
-uuid: 00671e04-fecd-4303-abae-7e417f686d40
+uuid: 2aa2d656-1494-4f12-bc2d-01e232861f9f
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.lodgify_property.field_lodgify_cover_image
-    - field.field.node.lodgify_property.field_lodgify_description
-    - field.field.node.lodgify_property.field_lodgify_id
-    - image.style.thumbnail
-    - node.type.lodgify_property
+    - field.field.node.lodgify_booking.field_for_lodgify_property_id
+    - field.field.node.lodgify_booking.field_lodgify_arrival
+    - field.field.node.lodgify_booking.field_lodgify_booking_status
+    - field.field.node.lodgify_booking.field_lodgify_departure
+    - field.field.node.lodgify_booking.field_lodgify_guest_name
+    - field.field.node.lodgify_booking.field_lodgify_id
+    - field.field.node.lodgify_booking.field_lodgify_source
+    - node.type.lodgify_booking
   module:
-    - image
+    - datetime
     - path
-    - text
-_core:
-  default_config_hash: 7bQcB8IqGsbr0CHjbKZPNHDSV2Ld0uA6lEnOkqJXVCQ
-id: node.lodgify_property.default
+id: node.lodgify_booking.default
 targetEntityType: node
-bundle: lodgify_property
+bundle: lodgify_booking
 mode: default
 content:
   created:
@@ -25,29 +25,54 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_lodgify_cover_image:
-    type: image_image
-    weight: 124
+  field_for_lodgify_property_id:
+    type: number
+    weight: 125
     region: content
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      placeholder: ''
     third_party_settings: {  }
-  field_lodgify_description:
-    type: text_textarea_with_summary
+  field_lodgify_arrival:
+    type: datetime_default
     weight: 123
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_lodgify_booking_status:
+    type: string_textfield
+    weight: 127
+    region: content
     settings:
-      rows: 9
-      summary_rows: 3
+      size: 60
       placeholder: ''
-      show_summary: false
+    third_party_settings: {  }
+  field_lodgify_departure:
+    type: datetime_default
+    weight: 124
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_lodgify_guest_name:
+    type: string_textfield
+    weight: 126
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_lodgify_id:
     type: number
     weight: 122
     region: content
     settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_lodgify_source:
+    type: string_textfield
+    weight: 128
+    region: content
+    settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   path:

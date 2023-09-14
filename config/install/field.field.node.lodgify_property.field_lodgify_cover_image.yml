@@ -7,6 +7,8 @@ dependencies:
     - node.type.lodgify_property
   module:
     - image
+_core:
+  default_config_hash: inEhDclXnp-BLvP02T14iTjLaVN4epvqFZHV_PMbP9k
 id: node.lodgify_property.field_lodgify_cover_image
 field_name: field_lodgify_cover_image
 entity_type: node

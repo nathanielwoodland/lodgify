@@ -1,0 +1,87 @@
+uuid: f887afe2-63a3-40b3-bb74-7f0faa91f339
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lodgify_booking.field_for_lodgify_property_id
+    - field.field.node.lodgify_booking.field_lodgify_arrival
+    - field.field.node.lodgify_booking.field_lodgify_booking_status
+    - field.field.node.lodgify_booking.field_lodgify_departure
+    - field.field.node.lodgify_booking.field_lodgify_guest_name
+    - field.field.node.lodgify_booking.field_lodgify_id
+    - field.field.node.lodgify_booking.field_lodgify_source
+    - node.type.lodgify_booking
+  module:
+    - datetime
+    - user
+id: node.lodgify_booking.default
+targetEntityType: node
+bundle: lodgify_booking
+mode: default
+content:
+  field_for_lodgify_property_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_lodgify_arrival:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_lodgify_booking_status:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_lodgify_departure:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_lodgify_guest_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_lodgify_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_lodgify_source:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

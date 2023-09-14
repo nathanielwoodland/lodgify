@@ -17,7 +17,7 @@ final class SyncFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'views', 'image', 'path', 'file', 'lodgify'];
+  protected static $modules = ['node', 'views', 'image', 'path', 'file', 'datetime', 'menu_ui', 'lodgify'];
 
   /**
    * Set to TRUE to strict check all configuration saved.

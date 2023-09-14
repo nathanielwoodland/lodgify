@@ -1,0 +1,34 @@
+uuid: b4676a46-25c3-498a-94e6-205972a0cd87
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.lodgify_booking.field_for_lodgify_property_id
+    - field.field.node.lodgify_booking.field_lodgify_arrival
+    - field.field.node.lodgify_booking.field_lodgify_booking_status
+    - field.field.node.lodgify_booking.field_lodgify_departure
+    - field.field.node.lodgify_booking.field_lodgify_guest_name
+    - field.field.node.lodgify_booking.field_lodgify_id
+    - field.field.node.lodgify_booking.field_lodgify_source
+    - node.type.lodgify_booking
+  module:
+    - user
+id: node.lodgify_booking.teaser
+targetEntityType: node
+bundle: lodgify_booking
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_for_lodgify_property_id: true
+  field_lodgify_arrival: true
+  field_lodgify_booking_status: true
+  field_lodgify_departure: true
+  field_lodgify_guest_name: true
+  field_lodgify_id: true
+  field_lodgify_source: true

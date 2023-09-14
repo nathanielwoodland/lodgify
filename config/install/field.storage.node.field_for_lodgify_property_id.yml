@@ -1,13 +1,11 @@
-uuid: 5ae691eb-4661-4a00-9b18-a6e5844671f6
+uuid: 189c9c5a-fbf2-4c77-ba57-a78451d17a22
 langcode: en
 status: true
 dependencies:
   module:
     - node
-_core:
-  default_config_hash: LHpOER7DJrEPi6PzWjB5rW8FF0pQqjS21aAD9KsCoac
-id: node.field_lodgify_id
-field_name: field_lodgify_id
+id: node.field_for_lodgify_property_id
+field_name: field_for_lodgify_property_id
 entity_type: node
 type: integer
 settings:

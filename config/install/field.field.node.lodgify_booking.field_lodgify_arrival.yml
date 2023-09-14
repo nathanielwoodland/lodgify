@@ -1,0 +1,21 @@
+uuid: 71e73b95-3d20-4534-9753-d92dd650f4e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_arrival
+    - node.type.lodgify_booking
+  module:
+    - datetime
+id: node.lodgify_booking.field_lodgify_arrival
+field_name: field_lodgify_arrival
+entity_type: node
+bundle: lodgify_booking
+label: Arrival
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
