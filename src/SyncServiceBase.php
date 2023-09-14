@@ -135,6 +135,6 @@ class SyncServiceBase {
    *
    * @return void
    */
-  protected function updateLodgifyNode($lodgify_property_node, $lodgify_property_api_data) {}
+  protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data) {}
 
 }
