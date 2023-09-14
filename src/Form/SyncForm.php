@@ -4,7 +4,7 @@ namespace Drupal\lodgify\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\lodgify\PropertiesService;
+use Drupal\lodgify\PropertiesSyncService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -13,15 +13,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class SyncForm extends FormBase {
 
   /**
-   * @var \Drupal\lodgify\PropertiesService
+   * @var \Drupal\lodgify\PropertiesSyncService
    */
-  protected $propertiesService;
+  protected $propertiesSyncService;
 
   /**
-   * @param \Drupal\lodgify\PropertiesService $propertiesService
+   * @param \Drupal\lodgify\PropertiesSyncService $propertiesSyncService
    */
-  public function __construct(PropertiesService $propertiesService) {
-    $this->propertiesService = $propertiesService;
+  public function __construct(PropertiesSyncService $propertiesSyncService) {
+    $this->propertiesSyncService = $propertiesSyncService;
   }
 
   /**
@@ -29,7 +29,7 @@ final class SyncForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('lodgify.properties_service')
+      $container->get('lodgify.properties_sync_service')
     );
   }
 
@@ -71,9 +71,10 @@ final class SyncForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $record_types = $form_state->getValue('record_types');
     $sync_type = $form_state->getValue('sync_type');
-    $this->propertiesService->syncLodgifyRecordTypes($record_types, $sync_type);
+    // @todo: add support for bookings record type
+    $record_types = $form_state->getValue('record_types');
+    $this->propertiesSyncService->syncLodgifyProperties($sync_type);
     $form_state->setRedirect('lodgify.settings.sync');
   }
 

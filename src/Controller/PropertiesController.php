@@ -5,22 +5,22 @@ namespace Drupal\lodgify\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\lodgify\PropertiesService;
+use Drupal\lodgify\PropertiesSyncService;
 
 final class PropertiesController extends ControllerBase {
 
   /**
-   * @var \Drupal\lodgify\PropertiesService
+   * @var \Drupal\lodgify\PropertiesSyncService
    */
-  protected PropertiesService $propertiesService;
+  protected PropertiesSyncService $propertiesSyncService;
 
   /**
    * The controller constructor.
    */
   public function __construct(
-    PropertiesService $propertiesService,
+    PropertiesSyncService $propertiesSyncService,
   ) {
-    $this->propertiesService = $propertiesService;
+    $this->propertiesSyncService = $propertiesSyncService;
   }
 
   /**
@@ -28,7 +28,7 @@ final class PropertiesController extends ControllerBase {
    */
   public static function create(ContainerInterface $container): self {
     return new self(
-      $container->get('lodgify.properties_service'),
+      $container->get('lodgify.properties_sync_service'),
     );
   }
 
@@ -54,7 +54,7 @@ final class PropertiesController extends ControllerBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function syncProperties(string $sync_type): RedirectResponse {
-    $this->propertiesService->syncLodgifyData('lodgify_property', $sync_type);
+    $this->propertiesSyncService->syncLodgifyData('lodgify_property', $sync_type);
     return $this->redirect('lodgify.settings');
   }
 
