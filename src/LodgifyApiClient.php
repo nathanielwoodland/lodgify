@@ -35,19 +35,17 @@ final class LodgifyApiClient {
    *
    * @return array
    */
-  public function getLodgifyData(string $lodgify_record_type, string $query_params): array {
+  public function getLodgifyData(string $route, string $query_params): array {
     $headers = $this->getRequestHeaders();
     if (!$headers) {
       return [
         'success' => false,
       ];
     }
-    // @todo: add pagination support
-    $page_number = 1;
     try {
       $response = $this->httpClient->request(
         'GET',
-        "https://api.lodgify.com/v2/$lodgify_record_type?includeCount=true&page=$page_number&size=50$query_params",
+        "https://api.lodgify.com/v2/$route?$query_params",
         $headers
       );
     }

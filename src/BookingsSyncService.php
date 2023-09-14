@@ -12,11 +12,12 @@ final class BookingsSyncService extends SyncServiceBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function syncLodgifyBookings(string $sync_type): void {
-    $lodgify_properties = $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false');
+    $lodgify_properties = $this->lodgifyApiClient->getLodgifyData('reservations/bookings', 'includeExternal=true');
     if (empty($lodgify_properties['response']['items'])) {
-      $this->messenger->addError($this->t("No Lodgify properties found."));
+      $this->messenger->addError($this->t("No Lodgify bookings found."));
     }
-    $this->syncLodgifyRecordsByType('lodgify_property', $sync_type, $lodgify_properties['response']['items']);
+    // @todo: call once method implemented
+    // $this->syncLodgifyRecordsByType('lodgify_booking', $sync_type, $lodgify_properties['response']['items']);
   }
 
   /**
@@ -31,8 +32,8 @@ final class BookingsSyncService extends SyncServiceBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data): void {
-    $lodgify_record_node->set('title', (!empty($lodgify_record_api_data['name'])) ? $lodgify_record_api_data['name'] : 'Booking ' . $lodgify_record_api_data['id']);
-    $lodgify_record_node->save();
+    // $lodgify_record_node->set('title', (!empty($lodgify_record_api_data['name'])) ? $lodgify_record_api_data['name'] : 'Booking ' . $lodgify_record_api_data['id']);
+    // $lodgify_record_node->save();
   }
 
 }

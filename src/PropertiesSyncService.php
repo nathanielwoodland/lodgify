@@ -12,7 +12,7 @@ final class PropertiesSyncService extends SyncServiceBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function syncLodgifyProperties(string $sync_type): void {
-    $lodgify_properties = $this->lodgifyApiClient->getLodgifyData('properties', '&includeInOut=false');
+    $lodgify_properties = $this->lodgifyApiClient->getLodgifyData('properties', 'includeInOut=false');
     if (empty($lodgify_properties['response']['items'])) {
       $this->messenger->addError($this->t("No Lodgify properties found."));
     }
