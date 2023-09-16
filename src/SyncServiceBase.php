@@ -98,8 +98,8 @@ class SyncServiceBase {
       $record_count++;
     }
     $message = "$record_count $record_type records synced using mode: $sync_type.";
-    $this->logger->info($message);
     $this->messenger->addStatus($message);
+    $this->logger->info($message);
   }
 
   /**

@@ -60,7 +60,9 @@ final class LodgifyApiClient {
     }
     $response = json_decode($response->getBody()->getContents(), true);
     if (empty($response['items'])) {
-      $this->messenger->addError($this->t("No $route records found."));
+      $error_message = $this->t("No $route records found.");
+      $this->messenger->addError($error_message);
+      $this->logger->error($error_message);
       return [
         'success' => false,
       ];
@@ -79,7 +81,9 @@ final class LodgifyApiClient {
   private function getRequestHeaders(): array|bool {
     $api_key = $this->settings->get('lodgify_api_key');
     if (!$api_key) {
-      $this->messenger->addError($this->t('Lodgify API key not found.'));
+      $error_message = $this->t('Lodgify API key not found.');
+      $this->messenger->addError($error_message);
+      $this->logger->error($error_message);
       return false;
     }
     return [
