@@ -12,11 +12,10 @@ final class BookingsSyncService extends SyncServiceBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function syncLodgifyBookings(string $sync_type): void {
-    $lodgify_properties = $this->lodgifyApiClient->getLodgifyData('reservations/bookings', 'includeExternal=true');
-    if (empty($lodgify_properties['response']['items'])) {
-      $this->messenger->addError($this->t('No Lodgify bookings found.'));
+    $request_result = $this->lodgifyApiClient->getLodgifyData('reservations/bookings', 'includeExternal=true');
+    if ($request_result['success']) {
+      $this->syncLodgifyRecordsByType('lodgify_booking', $sync_type, $request_result['records']);
     }
-     $this->syncLodgifyRecordsByType('lodgify_booking', $sync_type, $lodgify_properties['response']['items']);
   }
 
   /**

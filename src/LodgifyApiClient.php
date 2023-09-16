@@ -30,7 +30,7 @@ final class LodgifyApiClient {
   /**
    * Gets data from Lodgify API.
    *
-   * @param string $record_type
+   * @param string $route
    * @param string $query_params
    *
    * @return array
@@ -59,9 +59,15 @@ final class LodgifyApiClient {
       ];
     }
     $response = json_decode($response->getBody()->getContents(), true);
+    if (empty($response['items'])) {
+      $this->messenger->addError($this->t("No $route records found."));
+      return [
+        'success' => false,
+      ];
+    }
     return [
       'success' => true,
-      'response' => $response,
+      'records' => $response['items'],
     ];
   }
 
@@ -83,4 +89,5 @@ final class LodgifyApiClient {
       ],
     ];
   }
+
 }
