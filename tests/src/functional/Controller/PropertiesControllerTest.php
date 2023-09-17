@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\Tests\lodgify\Functional;
 
@@ -44,4 +46,5 @@ final class PropertiesControllerTest extends BrowserTestBase {
     $this->drupalGet('lodgify/properties');
     $this->assertSession()->elementTextEquals('css', 'h1', 'Lodgify properties');
   }
+
 }

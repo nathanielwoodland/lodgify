@@ -1,11 +1,13 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\lodgify\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\lodgify\PropertiesSyncService;
 use Drupal\lodgify\BookingsSyncService;
+use Drupal\lodgify\PropertiesSyncService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

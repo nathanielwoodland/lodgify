@@ -1,7 +1,12 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\lodgify;
 
+/**
+ *
+ */
 final class PropertiesSyncService extends SyncServiceBase {
 
   /**
@@ -19,7 +24,7 @@ final class PropertiesSyncService extends SyncServiceBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    *
    * Updates local Lodgify property node from API data array.
    *
@@ -27,6 +32,7 @@ final class PropertiesSyncService extends SyncServiceBase {
    * @param $lodgify_property_api_data
    *
    * @return void
+   *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data): void {
@@ -39,12 +45,12 @@ final class PropertiesSyncService extends SyncServiceBase {
       }
     }
     $lodgify_record_node->set('title', (!empty($lodgify_record_api_data['name'])) ? $lodgify_record_api_data['name'] : 'Property ' . $lodgify_record_api_data['id']);
-    $lodgify_record_node->set('field_lodgify_description', (!empty($lodgify_record_api_data['description'])) ? $lodgify_record_api_data['description'] : null);
+    $lodgify_record_node->set('field_lodgify_description', (!empty($lodgify_record_api_data['description'])) ? $lodgify_record_api_data['description'] : NULL);
     $lodgify_record_node->set('field_lodgify_cover_image', (!empty($image_file)) ? [
       'target_id' => $image_file->id(),
       'alt' => $this->t('Lodgify property cover photo'),
-      'title' => $this->t('Lodgify property cover photo')
-    ] : null);
+      'title' => $this->t('Lodgify property cover photo'),
+    ] : NULL);
     $lodgify_record_node->save();
   }
 

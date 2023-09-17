@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\Tests\lodgify\Functional;
 
@@ -33,7 +35,7 @@ final class SyncFormTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // @todo: implement mock API methods and results
+    // @todo implement mock API methods and results
     $settings = [];
     $settings['settings']['lodgify_api_key'] = (object) [
       'value' => 'YXjlubOq1Y4ocAeqS04g6VNWJY3iyg+XsVVoj0TkLXH10ZdNVWQZk0UMzTAVre7n',
@@ -62,6 +64,7 @@ final class SyncFormTest extends BrowserTestBase {
           $this->assertSession()->pageTextContains('Huge condo in Keystone, sleeps 14, great location');
           $this->drupalGetNodeByTitle('Huge condo in Keystone, sleeps 14, great location')->delete();
           break;
+
         case 'existing':
           $this->assertSession()->pageTextNotContains('Huge condo in Keystone, sleeps 14, great location');
           $this->drupalGet('/admin/config/system/lodgify/settings/sync');

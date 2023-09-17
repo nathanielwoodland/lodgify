@@ -18,7 +18,7 @@ Add Lodgify API key from your Lodgify account page o your settings.php file:
 ```
 /**
 * API key required by the Lodgify contributed module.
-  */
+*/
 $settings['lodgify_api_key'] = 'example_key';
 ```
 ## MAINTAINERS
@@ -26,4 +26,3 @@ $settings['lodgify_api_key'] = 'example_key';
 Current maintainers for Drupal 10:
 
 - Nathaniel Woodland - https://www.drupal.org/u/nwoodland
-

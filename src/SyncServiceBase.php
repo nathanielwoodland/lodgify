@@ -1,14 +1,19 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\lodgify;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\file\FileRepositoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\file\FileRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ *
+ */
 class SyncServiceBase {
   use StringTranslationTrait;
 
@@ -64,6 +69,7 @@ class SyncServiceBase {
    * @param array $lodgify_records
    *
    * @return void
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -72,11 +78,11 @@ class SyncServiceBase {
     foreach ($lodgify_records as $lodgify_record) {
       $lodgify_id = $lodgify_record['id'];
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
-      // Skip if record already exists and sync type is 'new'
+      // Skip if record already exists and sync type is 'new'.
       if ($existing_lodgify_property_node && $sync_type === 'new') {
         continue;
       }
-      // Skip if record doesn't yet exist and sync type is 'existing'
+      // Skip if record doesn't yet exist and sync type is 'existing'.
       if (!$existing_lodgify_property_node && $sync_type === 'existing') {
         continue;
       }
@@ -110,6 +116,7 @@ class SyncServiceBase {
    * @param int $lodgify_id
    *
    * @return \Drupal\Core\Entity\EntityInterface|null
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -126,7 +133,7 @@ class SyncServiceBase {
         ->getStorage('node')
         ->load(reset($lodgify_record_search));
     }
-    return false;
+    return FALSE;
   }
 
   /**

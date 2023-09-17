@@ -1,14 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 
 namespace Drupal\lodgify;
 
-use Drupal\Core\Site\Settings;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Psr\Log\LoggerInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Log\LoggerInterface;
 
 /**
  * Service class to manage interactions with Lodgify API.
@@ -39,7 +41,7 @@ final class LodgifyApiClient {
     $headers = $this->getRequestHeaders();
     if (!$headers) {
       return [
-        'success' => false,
+        'success' => FALSE,
       ];
     }
     try {
@@ -55,20 +57,20 @@ final class LodgifyApiClient {
       $this->messenger->addError($error_message);
       $this->logger->error($error_message);
       return [
-        'success' => false,
+        'success' => FALSE,
       ];
     }
-    $response = json_decode($response->getBody()->getContents(), true);
+    $response = json_decode($response->getBody()->getContents(), TRUE);
     if (empty($response['items'])) {
       $error_message = $this->t("No $route records found.");
       $this->messenger->addError($error_message);
       $this->logger->error($error_message);
       return [
-        'success' => false,
+        'success' => FALSE,
       ];
     }
     return [
-      'success' => true,
+      'success' => TRUE,
       'records' => $response['items'],
     ];
   }
@@ -84,7 +86,7 @@ final class LodgifyApiClient {
       $error_message = $this->t('Lodgify API key not found.');
       $this->messenger->addError($error_message);
       $this->logger->error($error_message);
-      return false;
+      return FALSE;
     }
     return [
       'headers' => [
