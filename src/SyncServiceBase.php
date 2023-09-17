@@ -109,6 +109,31 @@ class SyncServiceBase {
   }
 
   /**
+   * Updates local Lodgify node from API data array.
+   *
+   * @param $lodgify_record_node
+   *   The local node to update.
+   *
+   * @param $lodgify_record_api_data
+   *   The data to update the local node with.
+   *
+   * @return void
+   *   Errors saving data caught and printed by core modules.
+   */
+  protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data) {}
+
+  /**
+   * Sync records from Lodgify.
+   *
+   * @param string $sync_type
+   *   Expects 'new', 'existing', or 'all'.
+   *
+   * @return void
+   *   Success and errors are handles in called methods.
+   */
+  public function syncLodgifyRecords(string $sync_type): void {}
+
+  /**
    * Gets Drupal node that corresponds to lodgify record type and ID; returns
    * false if not found.
    *
@@ -135,13 +160,5 @@ class SyncServiceBase {
     }
     return FALSE;
   }
-
-  /**
-   * @param $lodgify_record_node
-   * @param $lodgify_record_api_data
-   *
-   * @return void
-   */
-  protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data) {}
 
 }

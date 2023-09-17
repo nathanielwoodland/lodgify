@@ -88,10 +88,10 @@ final class SyncForm extends FormBase {
     $sync_type = $form_state->getValue('sync_type');
     $record_types = $form_state->getValue('record_types');
     if (in_array('lodgify_property', $record_types)) {
-      $this->propertiesSyncService->syncLodgifyProperties($sync_type);
+      $this->propertiesSyncService->syncLodgifyRecords($sync_type);
     }
     if (in_array('lodgify_booking', $record_types)) {
-      $this->bookingsSyncService->syncLodgifyBookings($sync_type);
+      $this->bookingsSyncService->syncLodgifyRecords($sync_type);
     }
     $form_state->setRedirect('lodgify.settings.sync');
   }

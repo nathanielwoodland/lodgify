@@ -7,7 +7,7 @@ namespace Drupal\lodgify\Controller;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
- *
+ * Controller for viewing property records.
  */
 final class PropertiesController extends ControllerBase {
 

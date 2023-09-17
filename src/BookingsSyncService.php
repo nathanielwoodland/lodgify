@@ -5,18 +5,14 @@ declare(strict_types = 1);
 namespace Drupal\lodgify;
 
 /**
- *
+ * Service for syncing booking records from Lodgify.
  */
 final class BookingsSyncService extends SyncServiceBase {
 
   /**
-   * @param string $sync_type
-   *
-   * @return void
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * {@inheritDoc}
    */
-  public function syncLodgifyBookings(string $sync_type): void {
+  public function syncLodgifyRecords(string $sync_type): void {
     $request_result = $this->lodgifyApiClient->getLodgifyData('reservations/bookings', 'includeExternal=true');
     if ($request_result['success']) {
       $this->syncLodgifyRecordsByType('lodgify_booking', $sync_type, $request_result['records']);
@@ -25,15 +21,6 @@ final class BookingsSyncService extends SyncServiceBase {
 
   /**
    * {@inheritDoc}
-   *
-   * Updates local Lodgify booking node from API data array.
-   *
-   * @param $lodgify_property_node
-   * @param $lodgify_property_api_data
-   *
-   * @return void
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data): void {
     $lodgify_record_node->set('title', (!empty($lodgify_record_api_data['guest']['name'])) ? 'Booking for ' . $lodgify_record_api_data['guest']['name'] : 'Booking ' . $lodgify_record_api_data['id']);

@@ -5,18 +5,14 @@ declare(strict_types = 1);
 namespace Drupal\lodgify;
 
 /**
- *
+ * Service for syncing property records from Lodgify.
  */
 final class PropertiesSyncService extends SyncServiceBase {
 
   /**
-   * @param string $sync_type
-   *
-   * @return void
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * {@inheritDoc}
    */
-  public function syncLodgifyProperties(string $sync_type): void {
+  public function syncLodgifyRecords(string $sync_type): void {
     $request_result = $this->lodgifyApiClient->getLodgifyData('properties', 'includeInOut=false');
     if ($request_result['success']) {
       $this->syncLodgifyRecordsByType('lodgify_property', $sync_type, $request_result['records']);
@@ -25,15 +21,6 @@ final class PropertiesSyncService extends SyncServiceBase {
 
   /**
    * {@inheritDoc}
-   *
-   * Updates local Lodgify property node from API data array.
-   *
-   * @param $lodgify_property_node
-   * @param $lodgify_property_api_data
-   *
-   * @return void
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data): void {
     if (!empty($lodgify_record_api_data['image_url'])) {
