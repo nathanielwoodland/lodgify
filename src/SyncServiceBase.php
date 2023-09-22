@@ -9,41 +9,52 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\file\FileRepositoryInterface;
+use Drupal\node\Entity\Node;
 use Psr\Log\LoggerInterface;
 
 /**
- *
+ * Base class for syncing a specific Lodgify record type.
  */
 class SyncServiceBase {
   use StringTranslationTrait;
 
   /**
+   * CRUD service.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
+   * File management service.
+   *
    * @var \Drupal\file\FileRepositoryInterface
    */
   protected FileRepositoryInterface $fileRepository;
 
   /**
+   * Messaging service.
+   *
    * @var \Drupal\Core\Messenger\MessengerInterface
    */
   protected MessengerInterface $messenger;
 
   /**
+   * Lodgify API service.
+   *
    * @var \Drupal\lodgify\LodgifyApiClient
    */
   protected LodgifyApiClient $lodgifyApiClient;
 
   /**
+   * Logging service.
+   *
    * @var \Psr\Log\LoggerInterface
    */
   protected LoggerInterface $logger;
 
   /**
-   * Constructs a PropertiesSyncService object.
+   * Constructs a SyncServiceBase object.
    */
   public function __construct(
     EntityTypeManagerInterface $entityTypeManager,
@@ -62,20 +73,48 @@ class SyncServiceBase {
   }
 
   /**
+   * Sync records from Lodgify.
+   *
+   * @param string $sync_type
+   *   Expects 'new', 'existing', or 'all'.
+   *
+   * @return void
+   *   Success and errors are handles in called methods.
+   */
+  public function syncLodgifyRecords(string $sync_type): void {}
+
+  /**
+   * Updates local Lodgify node from API data array.
+   *
+   * @param \Drupal\node\Entity\Node $lodgify_record_node
+   *   The local node to update.
+   * @param array $lodgify_record_api_data
+   *   The data to update the local node with.
+   *
+   * @return void
+   *   Errors saving data caught and printed by core modules.
+   */
+  protected function updateLodgifyNode(Node $lodgify_record_node, array $lodgify_record_api_data) {}
+
+  /**
    * Creates and/or updates new and/or existing local Lodgify records.
    *
    * @param string $record_type
+   *   The local node type, e.g. 'lodgify_property' or 'lodgify_booking'.
    * @param string $sync_type
-   * @param array $lodgify_records
+   *   Expects 'new', 'existing', or 'all'.
+   * @param array $records_from_lodgify_api
+   *   Records from Lodgify API used to create / update local records.
    *
    * @return void
+   *   Syncing errors printed and logged by called methods.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected function syncLodgifyRecordsByType(string $record_type, string $sync_type, array $lodgify_records): void {
+  protected function syncLodgifyRecordsByType(string $record_type, string $sync_type, array $records_from_lodgify_api): void {
     $record_count = 0;
-    foreach ($lodgify_records as $lodgify_record) {
+    foreach ($records_from_lodgify_api as $lodgify_record) {
       $lodgify_id = $lodgify_record['id'];
       $existing_lodgify_property_node = $this->getLocalLodgifyRecord($record_type, $lodgify_id);
       // Skip if record already exists and sync type is 'new'.
@@ -109,38 +148,15 @@ class SyncServiceBase {
   }
 
   /**
-   * Updates local Lodgify node from API data array.
-   *
-   * @param $lodgify_record_node
-   *   The local node to update.
-   *
-   * @param $lodgify_record_api_data
-   *   The data to update the local node with.
-   *
-   * @return void
-   *   Errors saving data caught and printed by core modules.
-   */
-  protected function updateLodgifyNode($lodgify_record_node, $lodgify_record_api_data) {}
-
-  /**
-   * Sync records from Lodgify.
-   *
-   * @param string $sync_type
-   *   Expects 'new', 'existing', or 'all'.
-   *
-   * @return void
-   *   Success and errors are handles in called methods.
-   */
-  public function syncLodgifyRecords(string $sync_type): void {}
-
-  /**
-   * Gets Drupal node that corresponds to lodgify record type and ID; returns
-   * false if not found.
+   * Gets the Drupal node that corresponds to lodgify record type and ID.
    *
    * @param string $record_type
+   *   The local node type, e.g. 'lodgify_property' or 'lodgify_booking'.
    * @param int $lodgify_id
+   *   The record ID from Lodgify.
    *
    * @return \Drupal\Core\Entity\EntityInterface|null
+   *   Returns matching node, or false if not found.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
