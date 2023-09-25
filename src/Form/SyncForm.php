@@ -11,23 +11,31 @@ use Drupal\lodgify\PropertiesSyncService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a Lodgify form.
+ * Provides a Lodgify record sync form.
  */
 final class SyncForm extends FormBase {
 
   /**
+   * Properties sync service.
+   *
    * @var \Drupal\lodgify\PropertiesSyncService
    */
   protected $propertiesSyncService;
 
   /**
+   * Bookings sync service.
+   *
    * @var \Drupal\lodgify\BookingsSyncService
    */
   protected $bookingsSyncService;
 
   /**
+   * Builds class with required services.
+   *
    * @param \Drupal\lodgify\PropertiesSyncService $propertiesSyncService
+   *   Properties sync service.
    * @param \Drupal\lodgify\BookingsSyncService $bookingsSyncService
+   *   Bookings sync service.
    */
   public function __construct(
     PropertiesSyncService $propertiesSyncService,
@@ -61,13 +69,20 @@ final class SyncForm extends FormBase {
     $form['record_types'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Record types'),
-      '#options' => ['lodgify_property' => $this->t('Properties'), 'lodgify_booking' => $this->t('Bookings')],
+      '#options' => [
+        'lodgify_property' => $this->t('Properties'),
+        'lodgify_booking' => $this->t('Bookings'),
+      ],
       '#required' => TRUE,
     ];
     $form['sync_type'] = [
       '#type' => 'radios',
       '#title' => $this->t('Sync type'),
-      '#options' => ['all' => $this->t('All'), 'new' => $this->t('New'), 'existing' => $this->t('Existing')],
+      '#options' => [
+        'all' => $this->t('All'),
+        'new' => $this->t('New'),
+        'existing' => $this->t('Existing'),
+      ],
       '#required' => TRUE,
     ];
     $form['actions'] = [
