@@ -31,13 +31,16 @@ final class PropertiesSyncService extends SyncServiceBase {
           ->writeData($image_data, 'public://' . $lodgify_record_api_data['id'] . '_cover_image.png');
       }
     }
-    $lodgify_record_node->set('title', (!empty($lodgify_record_api_data['name'])) ? $lodgify_record_api_data['name'] : 'Property ' . $lodgify_record_api_data['id']);
-    $lodgify_record_node->set('field_lodgify_description', (!empty($lodgify_record_api_data['description'])) ? $lodgify_record_api_data['description'] : NULL);
-    $lodgify_record_node->set('field_lodgify_cover_image', (!empty($image_file)) ? [
+    $title = !empty($lodgify_record_api_data['name']) ? $lodgify_record_api_data['name'] : 'Property ' . $lodgify_record_api_data['id'];
+    $field_lodgify_description = !empty($lodgify_record_api_data['description']) ? $lodgify_record_api_data['description'] : NULL;
+    $field_lodgify_cover_image = !empty($image_file) ? [
       'target_id' => $image_file->id(),
       'alt' => $this->t('Lodgify property cover photo'),
       'title' => $this->t('Lodgify property cover photo'),
-    ] : NULL);
+    ] : NULL;
+    $lodgify_record_node->set('title', $title);
+    $lodgify_record_node->set('field_lodgify_description', $field_lodgify_description);
+    $lodgify_record_node->set('field_lodgify_cover_image', $field_lodgify_cover_image);
     $lodgify_record_node->save();
   }
 
