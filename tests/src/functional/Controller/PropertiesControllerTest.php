@@ -7,6 +7,8 @@ namespace Drupal\Tests\lodgify\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
+ * Tests the Properties Controller.
+ *
  * @group lodgify
  */
 final class PropertiesControllerTest extends BrowserTestBase {
@@ -19,23 +21,16 @@ final class PropertiesControllerTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'views', 'image', 'path', 'file', 'datetime', 'menu_ui', 'lodgify'];
-
-  /**
-   * Set to TRUE to strict check all configuration saved.
-   *
-   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
-   *
-   * @var bool
-   */
-  protected $strictConfigSchema = FALSE;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-  }
+  protected static $modules = [
+    'node',
+    'views',
+    'image',
+    'path',
+    'file',
+    'datetime',
+    'menu_ui',
+    'lodgify',
+  ];
 
   /**
    * Test properties index page.
