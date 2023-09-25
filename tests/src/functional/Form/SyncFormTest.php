@@ -7,6 +7,8 @@ namespace Drupal\Tests\lodgify\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
+ * Tests the Sync Form.
+ *
  * @group lodgify
  */
 final class SyncFormTest extends BrowserTestBase {
@@ -19,23 +21,23 @@ final class SyncFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'views', 'image', 'path', 'file', 'datetime', 'menu_ui', 'lodgify'];
-
-  /**
-   * Set to TRUE to strict check all configuration saved.
-   *
-   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
-   *
-   * @var bool
-   */
-  protected $strictConfigSchema = FALSE;
+  protected static $modules = [
+    'node',
+    'views',
+    'image',
+    'path',
+    'file',
+    'datetime',
+    'menu_ui',
+    'lodgify',
+  ];
 
   /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
     parent::setUp();
-    // @todo implement mock API methods and results
+    // @todo implement mock API methods and results.
     $settings = [];
     $settings['settings']['lodgify_api_key'] = (object) [
       'value' => 'YXjlubOq1Y4ocAeqS04g6VNWJY3iyg+XsVVoj0TkLXH10ZdNVWQZk0UMzTAVre7n',
