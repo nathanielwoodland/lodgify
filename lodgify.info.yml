@@ -3,7 +3,6 @@ type: module
 description: 'Sync Lodgify properties and bookings as nodes, and allow users to make new bookings.'
 package: Lodgify
 core_version_requirement: ^10
-
 dependencies:
   - drupal:views
   - drupal:node

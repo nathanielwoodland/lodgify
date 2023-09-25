@@ -2,15 +2,12 @@ services:
   lodgify.lodgify_api_client:
     class: Drupal\lodgify\LodgifyApiClient
     arguments: ['@settings', '@http_client', '@messenger', '@string_translation', '@logger.channel.lodgify']
-
   lodgify.properties_sync_service:
     class: Drupal\lodgify\PropertiesSyncService
     arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client', '@string_translation', '@logger.channel.lodgify']
-
   lodgify.bookings_sync_service:
     class: Drupal\lodgify\BookingsSyncService
     arguments: ['@entity_type.manager', '@file.repository', '@messenger', '@lodgify.lodgify_api_client', '@string_translation', '@logger.channel.lodgify']
-
   logger.channel.lodgify:
     parent: logger.channel_base
     arguments: ['lodgify']

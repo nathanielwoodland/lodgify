@@ -5,7 +5,6 @@ lodgify.properties.index:
     _controller: '\Drupal\lodgify\Controller\PropertiesController::index'
   requirements:
     _permission: 'access content'
-
 lodgify.settings.sync:
   path: '/admin/config/system/lodgify/settings/sync'
   defaults:
