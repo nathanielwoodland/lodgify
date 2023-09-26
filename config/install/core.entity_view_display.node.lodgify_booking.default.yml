@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.lodgify_booking.field_lodgify_booking_status
     - field.field.node.lodgify_booking.field_lodgify_departure
     - field.field.node.lodgify_booking.field_lodgify_guest_name
+    - field.field.node.lodgify_booking.field_lodgify_guest_phone
     - field.field.node.lodgify_booking.field_lodgify_id
     - field.field.node.lodgify_booking.field_lodgify_source
     - node.type.lodgify_booking
@@ -61,6 +62,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 104
+    region: content
+  field_lodgify_guest_phone:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 107
     region: content
   field_lodgify_id:
     type: number_integer

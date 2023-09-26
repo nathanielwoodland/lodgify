@@ -1,0 +1,19 @@
+uuid: f33ec795-017e-4bd0-9c5b-02be58515c1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_guest_phone
+    - node.type.lodgify_booking
+id: node.lodgify_booking.field_lodgify_guest_phone
+field_name: field_lodgify_guest_phone
+entity_type: node
+bundle: lodgify_booking
+label: 'Lodgify guest phone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

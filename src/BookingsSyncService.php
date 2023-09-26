@@ -30,6 +30,7 @@ final class BookingsSyncService extends SyncServiceBase {
     $field_lodgify_departure = !empty($lodgify_record_api_data['departure']) ? $lodgify_record_api_data['departure'] : NULL;
     $field_for_lodgify_property_id = !empty($lodgify_record_api_data['property_id']) ? $lodgify_record_api_data['property_id'] : NULL;
     $field_lodgify_guest_name = !empty($lodgify_record_api_data['guest']['name']) ? $lodgify_record_api_data['guest']['name'] : NULL;
+    $field_lodgify_guest_phone = !empty($lodgify_record_api_data['guest']['phone']) ? $lodgify_record_api_data['guest']['phone'] : NULL;
     $lodgify_record_node->set('title', $title);
     $lodgify_record_node->set('field_lodgify_arrival', $field_lodgify_arrival);
     $lodgify_record_node->set('field_lodgify_source', $field_lodgify_source);
@@ -37,6 +38,7 @@ final class BookingsSyncService extends SyncServiceBase {
     $lodgify_record_node->set('field_lodgify_departure', $field_lodgify_departure);
     $lodgify_record_node->set('field_for_lodgify_property_id', $field_for_lodgify_property_id);
     $lodgify_record_node->set('field_lodgify_guest_name', $field_lodgify_guest_name);
+    $lodgify_record_node->set('field_lodgify_guest_phone', $field_lodgify_guest_phone);
     $lodgify_record_node->save();
   }
 

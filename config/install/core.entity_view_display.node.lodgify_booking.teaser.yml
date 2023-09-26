@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.lodgify_booking.field_lodgify_booking_status
     - field.field.node.lodgify_booking.field_lodgify_departure
     - field.field.node.lodgify_booking.field_lodgify_guest_name
+    - field.field.node.lodgify_booking.field_lodgify_guest_phone
     - field.field.node.lodgify_booking.field_lodgify_id
     - field.field.node.lodgify_booking.field_lodgify_source
     - node.type.lodgify_booking
@@ -30,5 +31,6 @@ hidden:
   field_lodgify_booking_status: true
   field_lodgify_departure: true
   field_lodgify_guest_name: true
+  field_lodgify_guest_phone: true
   field_lodgify_id: true
   field_lodgify_source: true
