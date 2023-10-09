@@ -5,14 +5,16 @@ dependencies:
   config:
     - field.field.node.lodgify_property.field_lodgify_cover_image
     - field.field.node.lodgify_property.field_lodgify_description
+    - field.field.node.lodgify_property.field_lodgify_embed_code
     - field.field.node.lodgify_property.field_lodgify_id
     - node.type.lodgify_property
   module:
     - image
+    - lodgify
     - text
     - user
 _core:
-  default_config_hash: cFbT_16Edbvji-mYfUbnx2vp1yEFoy539rK9G838d6o
+  default_config_hash: TtJM9aYge3gU_vrbEUk6a1MJiwCgjwnIT9r9LQl0fpo
 id: node.lodgify_property.default
 targetEntityType: node
 bundle: lodgify_property
@@ -35,6 +37,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_lodgify_embed_code:
+    type: lodgify_widget_embed_code
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
     region: content
   field_lodgify_id:
     type: number_integer

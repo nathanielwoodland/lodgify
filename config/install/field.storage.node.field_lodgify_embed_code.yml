@@ -1,0 +1,19 @@
+uuid: 2cf25ab5-7121-4285-a528-d32770706815
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_lodgify_embed_code
+field_name: field_lodgify_embed_code
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
