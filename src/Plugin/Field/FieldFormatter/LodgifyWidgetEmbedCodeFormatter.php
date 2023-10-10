@@ -8,7 +8,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 
 /**
- * Plugin implementation of the 'Lodgify widget embed code' formatter.
+ * Field formatter plugin to allow rendering of Loggify embed code.
  *
  * @FieldFormatter(
  *   id = "lodgify_widget_embed_code",
