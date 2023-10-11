@@ -71,10 +71,12 @@ final class SyncForm extends FormBase {
       '#title' => $this->t('Record types'),
       '#options' => [
         'lodgify_property' => $this->t('Properties'),
-        'lodgify_booking' => $this->t('Bookings'),
       ],
       '#required' => TRUE,
     ];
+    if ($this->config('lodgify.settings')->get('enable_booking')) {
+      $form['record_types']['#options']['lodgify_booking'] = $this->t('Bookings');
+    }
     $form['sync_type'] = [
       '#type' => 'radios',
       '#title' => $this->t('Sync type'),
@@ -105,7 +107,7 @@ final class SyncForm extends FormBase {
     if (in_array('lodgify_property', $record_types)) {
       $this->propertiesSyncService->syncLodgifyRecords($sync_type);
     }
-    if (in_array('lodgify_booking', $record_types)) {
+    if ($this->config('lodgify.settings')->get('enable_booking') && in_array('lodgify_booking', $record_types)) {
       $this->bookingsSyncService->syncLodgifyRecords($sync_type);
     }
     $form_state->setRedirect('lodgify.settings.sync');

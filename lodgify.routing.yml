@@ -8,7 +8,7 @@ lodgify.settings:
 lodgify.settings.sync:
   path: '/admin/config/system/lodgify/settings/sync'
   defaults:
-    _title: 'Sync Lodgify records'
+    _title: 'Lodgify sync records'
     _form: 'Drupal\lodgify\Form\SyncForm'
   requirements:
     _permission: 'administer site configuration'
