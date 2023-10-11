@@ -6,7 +6,7 @@ dependencies:
     - field.storage.node.field_lodgify_description
     - node.type.lodgify_property
 _core:
-  default_config_hash: xwfYtV1jMI4KnINiwV4YcXoMpYfkynK1xoq_vc-IVEY
+  default_config_hash: Ef-RUJN3wmrwck00UpYXs8SDG0DLJYZj8lFCdYva1VE
 id: node.lodgify_property.field_lodgify_description
 field_name: field_lodgify_description
 entity_type: node

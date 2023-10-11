@@ -5,6 +5,8 @@ dependencies:
   module:
     - node
     - text
+_core:
+  default_config_hash: kcRGI3c0ih41qgVqVwv3TPk1K-F3OLIs7BbP_whxr7g
 id: node.field_lodgify_additional_info
 field_name: field_lodgify_additional_info
 entity_type: node

@@ -13,7 +13,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: R7y3XwOaz31g0-8N75Gt3lrfD7tq7DoEDZlZ626_rLc
+  default_config_hash: zK-ltpVJTAOjVe48K043fL0y7DFJ5lSzIOnKM5DWv8c
 id: node.lodgify_property.teaser
 targetEntityType: node
 bundle: lodgify_property

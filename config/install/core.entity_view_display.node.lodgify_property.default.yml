@@ -15,7 +15,7 @@ dependencies:
     - text
     - user
 _core:
-  default_config_hash: JqM-J_2-6L6dg1rnBx3JG_f1oo_3k33FiFB6-n1GyJc
+  default_config_hash: IwoK1JuMkUhLXkjPP4Y_1AW3QlpbpeMhzpIflsat6oE
 id: node.lodgify_property.default
 targetEntityType: node
 bundle: lodgify_property

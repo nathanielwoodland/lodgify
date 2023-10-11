@@ -5,7 +5,7 @@ dependencies:
   module:
     - node
 _core:
-  default_config_hash: tEx_-ddx0bloiN8tBBYXpRUdo-48eu3lWaETp0FOo4E
+  default_config_hash: efI3trw1siaTmFqA9PmLq6lSfbRIp5FbexXb8IfPGyw
 id: node.field_lodgify_description
 field_name: field_lodgify_description
 entity_type: node

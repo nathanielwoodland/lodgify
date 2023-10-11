@@ -12,7 +12,7 @@ dependencies:
     - node
     - user
 _core:
-  default_config_hash: _0gYWuPkTeEDrOcqh5YTajGZ-TcwWCH6_Rt0ZkUt1mQ
+  default_config_hash: BpuY7YROoyIMCA_ZNbZ3jOFuH2uotMqKxYfPQ7MY6uo
 id: lodgify_properties
 label: 'Lodgify properties'
 module: views
