@@ -23,14 +23,14 @@ mode: default
 content:
   field_lodgify_additional_info:
     type: text_default
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 5
     region: content
   field_lodgify_cover_image:
     type: image
-    label: above
+    label: visually_hidden
     settings:
       image_link: ''
       image_style: ''
@@ -41,30 +41,22 @@ content:
     region: content
   field_lodgify_description:
     type: lodgify_description
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 2
     region: content
   field_lodgify_embed_code:
     type: lodgify_widget_embed_code
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     weight: 4
-    region: content
-  field_lodgify_id:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_lodgify_id: true
