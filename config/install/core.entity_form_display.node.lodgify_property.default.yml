@@ -9,7 +9,7 @@ dependencies:
     - field.field.node.lodgify_property.field_lodgify_id
     - node.type.lodgify_property
 _core:
-  default_config_hash: 5Cv6Q1V1PbE8HWWfrbOmRARxEt9iRgpaKBj-Dpsc0lk
+  default_config_hash: hS-QVtXOaEyMmE_59T_A9umvgNQT739oqsF0Y-qmGJA
 id: node.lodgify_property.default
 targetEntityType: node
 bundle: lodgify_property

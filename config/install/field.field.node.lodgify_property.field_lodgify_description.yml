@@ -5,10 +5,8 @@ dependencies:
   config:
     - field.storage.node.field_lodgify_description
     - node.type.lodgify_property
-  module:
-    - text
 _core:
-  default_config_hash: gk0TPtbasH6lwkt9ptmqFQwN4eF6xF_wM26arxbFqSg
+  default_config_hash: xwfYtV1jMI4KnINiwV4YcXoMpYfkynK1xoq_vc-IVEY
 id: node.lodgify_property.field_lodgify_description
 field_name: field_lodgify_description
 entity_type: node
@@ -19,8 +17,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  display_summary: true
-  required_summary: false
-  allowed_formats: {  }
-field_type: text_with_summary
+settings: {  }
+field_type: string_long

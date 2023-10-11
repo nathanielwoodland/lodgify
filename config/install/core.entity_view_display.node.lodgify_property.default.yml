@@ -11,10 +11,9 @@ dependencies:
   module:
     - image
     - lodgify
-    - text
     - user
 _core:
-  default_config_hash: TtJM9aYge3gU_vrbEUk6a1MJiwCgjwnIT9r9LQl0fpo
+  default_config_hash: JqM-J_2-6L6dg1rnBx3JG_f1oo_3k33FiFB6-n1GyJc
 id: node.lodgify_property.default
 targetEntityType: node
 bundle: lodgify_property
@@ -32,7 +31,7 @@ content:
     weight: 1
     region: content
   field_lodgify_description:
-    type: text_default
+    type: lodgify_description
     label: above
     settings: {  }
     third_party_settings: {  }

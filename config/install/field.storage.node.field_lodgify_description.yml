@@ -4,15 +4,15 @@ status: true
 dependencies:
   module:
     - node
-    - text
 _core:
-  default_config_hash: X-oiusa2PUEsRzEsdmie1AHDwpp4652bf1-avIEjj3k
+  default_config_hash: tEx_-ddx0bloiN8tBBYXpRUdo-48eu3lWaETp0FOo4E
 id: node.field_lodgify_description
 field_name: field_lodgify_description
 entity_type: node
-type: text_with_summary
-settings: {  }
-module: text
+type: string_long
+settings:
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
