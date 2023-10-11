@@ -6,11 +6,12 @@
  */
 
 /**
- * Implements hook_page_bottom().
+ * Implements hook_preprocess_page().
  */
 function lodgify_preprocess_page(array &$variables) {
   if (
-    \Drupal::routeMatch()->getRouteName() == 'entity.node.canonical'
+    \Drupal::config('lodgify.settings')->get('enable_booking')
+    && \Drupal::routeMatch()->getRouteName() == 'entity.node.canonical'
     && !empty(($variables['node']))
     && is_a($variables['node'], '\Drupal\node\Entity\Node')
     && $variables['node']->getType() == 'lodgify_property'
