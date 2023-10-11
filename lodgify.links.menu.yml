@@ -1,6 +1,11 @@
+lodgify.settings:
+  title: Lodgify module settings
+  parent: system.admin_config_system
+  route_name: lodgify.settings
+  weight: 10
 lodgify.sync:
   title: Sync Lodgify records
   description: 'Sync Lodgify properties and bookings.'
   parent: system.admin_config_system
   route_name: lodgify.settings.sync
-  weight: 10
+  weight: 11

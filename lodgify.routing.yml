@@ -1,10 +1,10 @@
-lodgify.properties.index:
-  path: '/lodgify/properties'
+lodgify.settings:
+  path: '/admin/config/system/lodgify/settings'
   defaults:
-    _title: 'Lodgify properties'
-    _controller: '\Drupal\lodgify\Controller\PropertiesController::index'
+    _title: 'Lodgify module settings'
+    _form: 'Drupal\lodgify\Form\SettingsForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer site configuration'
 lodgify.settings.sync:
   path: '/admin/config/system/lodgify/settings/sync'
   defaults:
@@ -12,3 +12,10 @@ lodgify.settings.sync:
     _form: 'Drupal\lodgify\Form\SyncForm'
   requirements:
     _permission: 'administer site configuration'
+lodgify.properties.index:
+  path: '/lodgify/properties'
+  defaults:
+    _title: 'Lodgify properties'
+    _controller: '\Drupal\lodgify\Controller\PropertiesController::index'
+  requirements:
+    _permission: 'access content'
