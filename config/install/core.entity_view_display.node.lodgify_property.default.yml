@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.lodgify_property.field_lodgify_additional_info
     - field.field.node.lodgify_property.field_lodgify_cover_image
     - field.field.node.lodgify_property.field_lodgify_description
     - field.field.node.lodgify_property.field_lodgify_embed_code
@@ -11,6 +12,7 @@ dependencies:
   module:
     - image
     - lodgify
+    - text
     - user
 _core:
   default_config_hash: JqM-J_2-6L6dg1rnBx3JG_f1oo_3k33FiFB6-n1GyJc
@@ -19,6 +21,13 @@ targetEntityType: node
 bundle: lodgify_property
 mode: default
 content:
+  field_lodgify_additional_info:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
   field_lodgify_cover_image:
     type: image
     label: above

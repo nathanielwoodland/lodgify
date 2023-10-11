@@ -1,0 +1,19 @@
+uuid: 8f66b80b-ceda-4bd2-830b-04624c69c588
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_lodgify_additional_info
+field_name: field_lodgify_additional_info
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

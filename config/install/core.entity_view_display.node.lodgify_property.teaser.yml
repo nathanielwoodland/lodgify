@@ -4,14 +4,16 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.lodgify_property.field_lodgify_additional_info
     - field.field.node.lodgify_property.field_lodgify_cover_image
     - field.field.node.lodgify_property.field_lodgify_description
+    - field.field.node.lodgify_property.field_lodgify_embed_code
     - field.field.node.lodgify_property.field_lodgify_id
     - node.type.lodgify_property
   module:
     - user
 _core:
-  default_config_hash: 0RQ5Yi4-e_VqsymHYb0oHPXTPNj9SMQ_brWERmBCOt0
+  default_config_hash: R7y3XwOaz31g0-8N75Gt3lrfD7tq7DoEDZlZ626_rLc
 id: node.lodgify_property.teaser
 targetEntityType: node
 bundle: lodgify_property
@@ -23,6 +25,8 @@ content:
     weight: 100
     region: content
 hidden:
+  field_lodgify_additional_info: true
   field_lodgify_cover_image: true
   field_lodgify_description: true
+  field_lodgify_embed_code: true
   field_lodgify_id: true

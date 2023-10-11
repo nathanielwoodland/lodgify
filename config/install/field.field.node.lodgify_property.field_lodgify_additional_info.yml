@@ -1,0 +1,24 @@
+uuid: 13d98ac6-7d44-4e8b-b076-efe9be5271ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lodgify_additional_info
+    - filter.format.basic_html
+    - node.type.lodgify_property
+  module:
+    - text
+id: node.lodgify_property.field_lodgify_additional_info
+field_name: field_lodgify_additional_info
+entity_type: node
+bundle: lodgify_property
+label: 'Additional information'
+description: "Use this field to share additional information such as links to the property's respective AirBnb or VRBO pages."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
